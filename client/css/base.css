@@ -250,6 +250,10 @@ a {
     background-image: url(../assets/client-interface/cards/images/hostel-o.jpg);
 }
 
+.place-card.has-photo {
+    background-image: linear-gradient(to top, rgba(13, 17, 23, 0.6) 0%, rgba(13, 17, 23, 0) 55%), var(--photo);
+}
+
 .card-open {
     position: absolute;
     inset: 0;
@@ -496,7 +500,7 @@ a {
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: transparent;
+    background: rgba(240, 246, 252, 0.85);
     cursor: pointer;
 }
 
@@ -620,4 +624,14 @@ a {
 
 .panel-title:focus {
     outline: none;
+}
+
+.panel-photo {
+    display: block;
+    width: 100%;
+    height: 200px;
+    margin: 8px 0 12px;
+    object-fit: cover;
+    border-radius: 20px;
+    background: #cfe3f5;
 }

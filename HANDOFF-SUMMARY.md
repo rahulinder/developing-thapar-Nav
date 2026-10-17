@@ -71,4 +71,5 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Place photos
 - Admin: when adding or editing a place, the detail row has "Photo of the location". The photo is shrunk in the browser (longest side 1280px, JPEG, at most 400 KB, via admin/js/photo.js) and uploaded after the place saves. "Remove photo" deletes it on Save. The places list shows a small thumbnail.
 - Backend: PUT/DELETE /api/places/:id/photo (admin, raw image body, 450 KB limit, signature checked), GET /api/places/:id/photo (public for active places). Photo bytes live in the Place document with select:false, so list responses carry only hasPhoto and photoVersion.
-- The client app does not display photos yet.
+- Client: place cards use the photo as the card background, and the details panel shows it at the top (client/js/api.js builds photoUrl from hasPhoto and photoVersion; cards.js, place-panel.js and css/base.css draw it). Places without a photo look as before.
+- Fixed: the details panel printed the word "null" for places with no other name or description.
