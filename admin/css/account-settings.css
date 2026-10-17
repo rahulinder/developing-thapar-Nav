@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  padding: 0;
+  background-color: #ddeeff;
+  font-family: Google Sans Flex;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+/* ____________________________________________________________ */
+#dashboard-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  column-gap: 8px;
+}
+/* ____________________________________________________________ */
+#dashboard-2 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    /* margin: 24px; */
+    flex: 1;
+    min-width: 0;
+    padding: 8px 8px 8px 0;
+    align-items: center;
+}
+#title {
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+#title img {
+    width: 0px;
+    height: 0px;
+    margin-bottom: 8px;
+    transition: 300ms;
+}
+#title h3 {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 8px;
+  padding: 8px 16px;
+}
+#title:hover img {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transition: 300ms;
+}
+#title:hover {
+  cursor: pointer;
+}
+
+/* ____________________________________________________________ */
+
+.outer-card{
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  background-color: #0d1117;
+  color: black;
+  width: 50%;
+  align-items: center;
+  /* height: 100%; */
+  /* width: fit-content; */
+  height: fit-content;
+  padding: 16px 4px 4px 4px;
+  border-radius: 24px;
+  column-gap: 4px;
+  transition: 300ms;
+}
+
+.inner-card{
+  background-color: #f0f6fc;
+  width: 100%;
+  /* width:fit-content; */
+  height: fit-content;
+  min-height: 88px;
+  max-height: 88px;
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  column-gap: 24px;
+  transition: 300ms;
+  align-items: center;
+}
+.inner-card p{
+  text-align: center;
+  align-items: center;
+  /* font-weight: 500; */
+  font-size: 18px;
+}
+.edit{
+  display: none;
+  transition: 300ms;
+}
+.inner-card:hover {
+  width: calc(100% + 32px);
+  /* width: calc(fit-content + 32px); */
+  border-radius: 20px;
+  transition: 300ms;
+  background-color: #0d1117;
+  /* background-color: #008152; */
+  color: white;
+}
+.inner-card:hover p{
+  font-size: 22px;
+  transition: 300ms;
+}
+.inner-card:hover .edit{
+  display: block;
+  transition: 300ms;
+}
+.inner-card:hover #profile-picture{
+  border-radius: 8px;
+  /* transition: 300ms; */
+  border: 2px solid #ffffff64;
+}
+
+.top-card{
+  border-radius: 20px 20px 0 0;
+  max-height: 176px;;
+  height: 176px;
+}
+.top-card #profile-picture{
+  border-radius: 100vw;
+  max-width: 144px;
+  max-height: 144px;
+  /* transition: 300ms; */
+}
+
+.bottom-card{
+  border-radius: 0 0 20px 20px;
+}
+.labels{
+  font-weight: 500;
+}
+.values{
+  margin-left: auto;
+  align-content: flex-end;
+}
+#password-dots{
+  font-weight: bolder;
+  font-size: 24px;
+}

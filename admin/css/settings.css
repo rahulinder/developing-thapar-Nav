@@ -1,0 +1,118 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  padding: 0;
+  background-color: #ddeeff;
+  font-family: Google Sans Flex;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ____________________________________________________________ */
+#dashboard-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  column-gap: 8px;
+}
+/* ____________________________________________________________ */
+#dashboard-2 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    margin: 0 28%;
+    width: 100%;
+}
+#title {
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#title img {
+    width: 0px;
+    height: 0px;
+    margin: 0;
+    margin-bottom: 8px;
+    transition: 300ms;
+}
+#title h3 {
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 8px;
+    padding: 8px 16px;
+}
+#title:hover img {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    transition: 300ms;
+}
+#title:hover {
+    cursor: pointer;
+}
+#account-settings-card,
+#theme-settings-card,
+#accessibility-settings-card {
+    display: inline-flex;
+    background-color: #0d1117;
+    color: black;
+    width: 40vw;
+    height: 100%;
+    max-height: 96px;
+    padding: 16px 4px 4px 4px;
+    border-radius: 24px;
+    column-gap: 4px;
+    transition: 300ms;
+}
+#account-settings-card span,
+#theme-settings-card span,
+#accessibility-settings-card span {
+    display: flex;
+    background-color: #f0f6fc;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 8px;
+    border-radius: 20px;
+}
+#account-settings-card span p,
+#theme-settings-card span p,
+#accessibility-settings-card span p {
+    font-size: 20px;
+    font-weight: 450;
+    align-content: center;
+}
+#account-settings-card span img,
+#theme-settings-card span img,
+#accessibility-settings-card span img {
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    margin-left: auto;
+    opacity: 0;
+}
+#account-settings-card:hover,
+#theme-settings-card:hover,
+#accessibility-settings-card:hover {
+    padding: 4px 4px 16px 4px;
+}
+#account-settings-card:hover img,
+#theme-settings-card:hover img,
+#accessibility-settings-card:hover img {
+  transition: ease-in-out;
+  transition: 300ms;
+  cursor: pointer;
+  opacity: 100;
+  transition: 300ms;
+}
+/* ____________________________________________________________ */
+
