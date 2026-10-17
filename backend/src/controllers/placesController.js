@@ -107,6 +107,57 @@ const deletePlace = asyncHandler(async (req, res) => {
     res.json({ message: "Place deleted.", id: req.params.id });
 });
 
+const PHOTO_SIGNATURES = [
+    { type: "image/jpeg", test: (b) => b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff },
+    { type: "image/png", test: (b) => b.length > 8 && b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47 },
+    { type: "image/webp", test: (b) => b.length > 12 && b.toString("ascii", 0, 4) === "RIFF" && b.toString("ascii", 8, 12) === "WEBP" }
+];
+
+const getPhoto = asyncHandler(async (req, res) => {
+    const place = await Place.findById(req.params.id).select("+photo isActive hasPhoto photoVersion").lean();
+    if (!place || !place.hasPhoto || !place.photo || !place.photo.data || (!place.isActive && !req.admin)) {
+        throw new HttpError(404, "This place has no photo.");
+    }
+    const data = Buffer.isBuffer(place.photo.data) ? place.photo.data : Buffer.from(place.photo.data.buffer || place.photo.data);
+    res.set("Content-Type", place.photo.contentType);
+    res.set("Content-Length", String(data.length));
+    res.set("X-Content-Type-Options", "nosniff");
+    res.set("Cache-Control", place.isActive ? "public, max-age=86400" : "private, no-store");
+    res.send(data);
+});
+
+const setPhoto = asyncHandler(async (req, res) => {
+    const bytes = req.body;
+    if (!Buffer.isBuffer(bytes) || bytes.length === 0) {
+        throw new HttpError(400, "Send the photo as a JPEG, PNG or WebP image.");
+    }
+    const match = PHOTO_SIGNATURES.find((entry) => entry.test(bytes));
+    if (!match) {
+        throw new HttpError(400, "That file is not a JPEG, PNG or WebP image.");
+    }
+    const place = await Place.findById(req.params.id).select("+photo");
+    if (!place) {
+        throw new HttpError(404, "Place not found.");
+    }
+    place.photo = { data: bytes, contentType: match.type };
+    place.hasPhoto = true;
+    place.photoVersion = (place.photoVersion || 0) + 1;
+    await place.save();
+    res.json({ place });
+});
+
+const removePhoto = asyncHandler(async (req, res) => {
+    const place = await Place.findById(req.params.id).select("+photo");
+    if (!place) {
+        throw new HttpError(404, "Place not found.");
+    }
+    place.photo = undefined;
+    place.hasPhoto = false;
+    place.photoVersion = (place.photoVersion || 0) + 1;
+    await place.save();
+    res.json({ place });
+});
+
 function rowMessage(error) {
     if (error && error.name === "ValidationError" && error.errors) {
         return Object.values(error.errors)[0].message;
@@ -160,4 +211,4 @@ const bulkImport = asyncHandler(async (req, res) => {
     res.json({ ...counts, results });
 });
 
-module.exports = { listPlaces, getPlace, createPlace, updatePlace, deletePlace, bulkImport };
+module.exports = { listPlaces, getPlace, createPlace, updatePlace, deletePlace, bulkImport, getPhoto, setPhoto, removePhoto };

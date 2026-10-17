@@ -109,3 +109,10 @@ Body: `{ "mode": "skip" | "update", "places": [ { name, category, lat, lng, ... 
 - `skip` (default) leaves a place alone when its name already exists. `update` overwrites it with the new values.
 - Each place is checked on its own. One bad row does not stop the others.
 - Response: `{ created, updated, skipped, failed, results: [ { index, status, id?, error? } ] }`
+
+
+## Place photo
+
+- `GET /api/places/:id/photo` returns the image. Public for active places, admin only for hidden ones. 404 when the place has no photo.
+- `PUT /api/places/:id/photo` (admin) with the image as the raw request body and `Content-Type` image/jpeg, image/png or image/webp. Maximum 450 KB. Returns `{ place }` with `hasPhoto: true` and a new `photoVersion`.
+- `DELETE /api/places/:id/photo` (admin) removes it.

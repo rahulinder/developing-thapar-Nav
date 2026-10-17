@@ -67,3 +67,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - settings.html, student-data-details.html and account-settings.html no longer carry their own top bar and side bar markup or CSS.
 - Removed accommodations-data.html, css/accommodations-data.css and js/topbar-and-sidebar.js.
 - Removed the bottom bar from settings.html and its CSS; no admin page has a bottom bar now.
+
+## Place photos
+- Admin: when adding or editing a place, the detail row has "Photo of the location". The photo is shrunk in the browser (longest side 1280px, JPEG, at most 400 KB, via admin/js/photo.js) and uploaded after the place saves. "Remove photo" deletes it on Save. The places list shows a small thumbnail.
+- Backend: PUT/DELETE /api/places/:id/photo (admin, raw image body, 450 KB limit, signature checked), GET /api/places/:id/photo (public for active places). Photo bytes live in the Place document with select:false, so list responses carry only hasPhoto and photoVersion.
+- The client app does not display photos yet.

@@ -11,7 +11,8 @@ export class ApiError extends Error {
 
 export async function call(path, { method = "GET", body, auth = true, onSlow } = {}) {
     const headers = { Accept: "application/json" };
-    if (body !== undefined) headers["Content-Type"] = "application/json";
+    const isBlob = typeof Blob !== "undefined" && body instanceof Blob;
+    if (body !== undefined) headers["Content-Type"] = isBlob ? body.type : "application/json";
     if (auth) {
         const session = getSession();
         if (session) headers.Authorization = "Bearer " + session.token;
@@ -24,7 +25,7 @@ export async function call(path, { method = "GET", body, auth = true, onSlow } =
         response = await fetch(API_BASE_URL + API_PREFIX + path, {
             method,
             headers,
-            body: body === undefined ? undefined : JSON.stringify(body),
+            body: body === undefined ? undefined : isBlob ? body : JSON.stringify(body),
             signal: controller.signal
         });
     } catch (error) {
@@ -122,4 +123,16 @@ export function deleteWalkway(id) {
 
 export function bulkImportPlaces(places, mode) {
     return call("/places/bulk", { method: "POST", body: { mode, places } });
+}
+
+export function uploadPlacePhoto(id, blob) {
+    return call("/places/" + encodeURIComponent(id) + "/photo", { method: "PUT", body: blob });
+}
+
+export function deletePlacePhoto(id) {
+    return call("/places/" + encodeURIComponent(id) + "/photo", { method: "DELETE" });
+}
+
+export function placePhotoUrl(place) {
+    return API_BASE_URL + API_PREFIX + "/places/" + encodeURIComponent(place._id) + "/photo?v=" + (place.photoVersion || 0);
 }

@@ -38,3 +38,8 @@ Campus Data, then "Import Places (CSV)" (or the "Import CSV" button on the Place
 3. Choose what happens to names that already exist: skip them, or update them.
 4. Click Import. Rows with problems are never imported. The page shows how many were added, updated, skipped or failed.
 Tips: the words "null", "none" and "-" in a cell are treated as empty. Save the file as "CSV UTF-8" so accents like é survive. `places-fixed.csv` is a cleaned copy of your sheet that imports with no problems.
+
+
+## Adding a photo to a place
+
+Click Add place or the edit icon, then use "Photo of the location" in the lower part of the row. Choose a JPEG, PNG or WebP file. Large photos are shrunk automatically. Click Save to upload it. Use Remove photo and Save to delete it.
