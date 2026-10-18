@@ -73,3 +73,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Backend: PUT/DELETE /api/places/:id/photo (admin, raw image body, 450 KB limit, signature checked), GET /api/places/:id/photo (public for active places). Photo bytes live in the Place document with select:false, so list responses carry only hasPhoto and photoVersion.
 - Client: place cards use the photo as the card background, and the details panel shows it at the top (client/js/api.js builds photoUrl from hasPhoto and photoVersion; cards.js, place-panel.js and css/base.css draw it). Places without a photo look as before.
 - Fixed: the details panel printed the word "null" for places with no other name or description.
+
+## Settings shortcut
+- The Settings page (settings.html and css/settings.css) was removed. The side bar's Settings button now opens account-settings.html directly, and that button is highlighted while Account Settings is open.
