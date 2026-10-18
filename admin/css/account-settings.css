@@ -71,7 +71,7 @@ body {
   row-gap: 4px;
   background-color: #0d1117;
   color: black;
-  width: 50%;
+  min-width: 1024px;
   align-items: center;
   /* height: 100%; */
   /* width: fit-content; */
