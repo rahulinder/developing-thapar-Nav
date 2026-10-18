@@ -17,11 +17,15 @@
     <form id="credentials-card">
         <span>
             <label for="visitor-name" class="visually-hidden">Your name</label>
-            <input id="visitor-name" type="text" placeholder="Name (optional)" maxlength="40" autocomplete="given-name">
+            <input id="visitor-name" type="text" placeholder="Name" maxlength="40" autocomplete="name" required>
+        </span>
+        <span>
+            <label for="visitor-contact" class="visually-hidden">Phone number or email</label>
+            <input id="visitor-contact" type="text" placeholder="Phone or email" maxlength="80" autocomplete="tel" required>
         </span>
         <span>
             <button type="submit">Continue</button>
-            <button type="button" id="skip-btn">Skip</button>
+            <button type="button" id="skip-btn">Continue as guest</button>
         </span>
     </form>
 </body>

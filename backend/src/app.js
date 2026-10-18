@@ -6,6 +6,7 @@ const { createPlacesRouter } = require("./routes/places");
 const { createPathsRouter } = require("./routes/paths");
 const { createRouteRouter } = require("./routes/route");
 const { createAuthRouter } = require("./routes/auth");
+const { createClientsRouter } = require("./routes/clients");
 
 function createApp(env, { limits } = {}) {
     const app = express();
@@ -33,6 +34,7 @@ function createApp(env, { limits } = {}) {
     app.use("/api/places", createPlacesRouter({ writeLimiter: limiters.write }));
     app.use("/api/paths", createPathsRouter({ writeLimiter: limiters.write }));
     app.use("/api/route", createRouteRouter({ routeLimiter: limiters.route }));
+    app.use("/api/clients", createClientsRouter({ writeLimiter: limiters.write }));
 
     app.use(notFound);
     app.use(errorHandler);
