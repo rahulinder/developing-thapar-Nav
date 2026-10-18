@@ -60,3 +60,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Data flow for navigation: places have a junction link; the network of junctions and walkways must be drawn (E3) and places linked before /api/route can work. The client shows "No places yet" until places are added in the admin panel.
 - First step in a new chat: unzip thapar-nav-ABC.zip, then thapar-nav-E.zip, thapar-nav-E3.zip, thapar-nav-E4.zip and thapar-nav-D1.zip and thapar-nav-D2.zip and thapar-nav-D3-D4.zip and thapar-nav-D5.zip and thapar-nav-settings.zip and thapar-nav-userdata.zip and thapar-nav-account.zip and thapar-nav-account-fix.zip over it (later zips overwrite earlier files), skim the code and docs, then ask which item to build.
 - Do not ask me to paste database credentials, and do not store them. If I shared them in a chat earlier, I should change my Atlas password.
+
+## Admin logo link
+- admin/top-bar.html: the top bar logo is wrapped in a link to dashboard.html (id logo-link), so it works on every admin page loaded through shell.js. Not browser-tested.
+
+## Top bar name across admin pages
+- admin/js/shell.js: top bar shows admin.displayName (falls back to username) and the profile picture on every admin page, from the saved session, then refreshes from GET /api/auth/me once per page load and re-saves the session. Not browser-tested.
