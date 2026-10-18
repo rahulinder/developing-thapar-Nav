@@ -97,6 +97,13 @@ function buildRow(place, startEditing) {
     const active = checkbox("Active", place.isActive);
     const description = textInput(place.description || "", "Description", { maxlength: "1000" });
     const aliases = textInput((place.aliases || []).join(", "), "Other names", { maxlength: "400" });
+    const hasAliases = (place.aliases || []).length > 0;
+    const aliasToggle = checkbox("Add other names", hasAliases);
+    const aliasLabel = el("label", { hidden: !hasAliases }, ["Other names (comma separated)", aliases]);
+    aliasToggle.input.addEventListener("change", () => {
+        aliasLabel.hidden = !aliasToggle.input.checked;
+        if (aliasToggle.input.checked && !aliases.disabled) aliases.focus();
+    });
     const hours = textInput(place.openingHours || "", "Opening hours", { maxlength: "120" });
     const entrance = checkbox("Entrance", Boolean(place.isEntrance));
     const errorBox = el("p", { class: "row-error", role: "alert", hidden: true });
@@ -154,7 +161,7 @@ function buildRow(place, startEditing) {
         refreshPhoto();
     });
 
-    const fields = [nameInput, category, lat, lng, description, aliases, hours, photoInput, photoRemove, ...roleBoxes.map((r) => r.input), active.input, entrance.input];
+    const fields = [nameInput, category, lat, lng, description, aliasToggle.input, aliases, hours, photoInput, photoRemove, ...roleBoxes.map((r) => r.input), active.input, entrance.input];
 
     const actions = el("div", { class: "actions" });
     const detailCell = el("td", { colspan: "7" });
@@ -175,7 +182,8 @@ function buildRow(place, startEditing) {
     detailCell.append(
         el("div", { class: "detail-grid" }, [
             el("label", {}, ["Description", description]),
-            el("label", {}, ["Other names (comma separated)", aliases]),
+            aliasToggle.wrap,
+            aliasLabel,
             el("label", {}, ["Opening hours", hours]),
             entrance.wrap
         ]),
@@ -231,7 +239,7 @@ function buildRow(place, startEditing) {
         }
         const visibleTo = roleBoxes.filter((r) => r.input.checked).map((r) => r.key);
         if (visibleTo.length === 0) return { error: "Pick at least one group that can see this place." };
-        const aliasList = aliases.value.split(",").map((a) => a.trim()).filter(Boolean);
+        const aliasList = !aliasToggle.input.checked ? [] : aliases.value.split(",").map((a) => a.trim()).filter(Boolean);
         if (aliasList.length > 10) return { error: "Use at most 10 other names." };
         if (aliasList.some((a) => a.length > 80)) return { error: "Each other name must be 80 characters or fewer." };
         return {

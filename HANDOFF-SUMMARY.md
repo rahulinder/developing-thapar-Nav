@@ -70,3 +70,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Client home: shortcuts removed, satellite view
 - client/index.html and home.js: the shortcuts bar above the map is gone (client/js/shortcuts.js and ROLE_SHORTCUTS in config.js are now unused).
 - Satellite toggle (layers button under the directions button): map.js has toggleSatellite() switching between OpenStreetMap and Esri World Imagery tiles (https://server.arcgisonline.com). Not browser-tested.
+
+## Optional other names (aliases) in places form
+- admin/js/places-page.js: the add/edit place detail row has an "Add other names" checkbox; the Other names field shows only when ticked (ticked automatically when the place already has other names). Unticked saves an empty alias list. Not browser-tested.
