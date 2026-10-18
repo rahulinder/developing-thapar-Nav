@@ -73,3 +73,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Optional other names (aliases) in places form
 - admin/js/places-page.js: the add/edit place detail row has an "Add other names" checkbox; the Other names field shows only when ticked (ticked automatically when the place already has other names). Unticked saves an empty alias list. Not browser-tested.
+
+## User Data page fix (missing files)
+- The committed repo referenced files that were not committed: admin/js/user-data-page.js (page stayed on Loading), backend/src/models/Client.js plus its export in models/index.js (controller uses Client), and client-side visit registration.
+- Added: user-data-page.js (tabs All/Registered/Guests, search, user type filter, Load more, calls GET /api/clients); Client model (clientId, userType, name, contact, isGuest, visitCount, lastSeenAt); client/js/visits.js (random clientId in localStorage, POST /api/clients/ping once per session and role); roles.js requireRole calls registerVisit; login-page.js now reads name and contact (validated phone or email) and the guest button clears both. client/js/config.js is untouched.
+- Not tested against Atlas or a browser.

@@ -1,5 +1,6 @@
 import { ROLES, STORAGE_KEYS } from "./config.js";
 import { storage } from "./storage.js";
+import { registerVisit } from "./visits.js";
 
 const SAFE_NEXT = /^[A-Za-z0-9_-]+\.html(\?[A-Za-z0-9_\-=&%.+]*)?$/;
 
@@ -44,6 +45,7 @@ export function safeNextUrl(next) {
 export function requireRole() {
     const role = getRole();
     if (role) {
+        registerVisit(role);
         return role;
     }
     const page = window.location.pathname.split("/").pop() || "index.html";
