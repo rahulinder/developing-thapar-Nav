@@ -30,7 +30,7 @@ function createApp(env, { limits } = {}) {
     });
 
     app.use("/api", limiters.general);
-    app.use("/api/auth", createAuthRouter({ loginLimiter: limiters.login }));
+    app.use("/api/auth", createAuthRouter({ loginLimiter: limiters.login, writeLimiter: limiters.write }));
     app.use("/api/places", createPlacesRouter({ writeLimiter: limiters.write }));
     app.use("/api/paths", createPathsRouter({ writeLimiter: limiters.write }));
     app.use("/api/route", createRouteRouter({ routeLimiter: limiters.route }));
