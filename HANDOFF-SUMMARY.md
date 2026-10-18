@@ -82,3 +82,11 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Client: greeting and menu drawer
 - #role-note on the home page now shows only "Hi <name>" (larger, 32px, bold) and is hidden when there is no name; the user type text and Change link are removed (change user type is still in the menu).
 - Menu button (nav bar on index.html and places.html) opens a drawer that slides in from the right covering 75% of the page, same items as menu.html (Home, Change user type, Support, Logout), with a backdrop, close button and Escape to close. Files: client/js/menu-drawer.js, client/css/drawer.css. menu.html still exists as a fallback. Drawer open/close checked in a real browser with a test page; not checked on the real pages.
+
+## Client: background, scrollbars, satellite default, support overlay
+- Background #f0f6fc on html and body in base.css, menu.css, places.css (also the sticky category bar), drawer.css (login.css and user-option.css already used it). Old cream #fdf0d5 is gone.
+- Scrollbars hidden everywhere on the client (scrollbar-width none and ::-webkit-scrollbar display none in base.css, menu.css, login.css, user-option.css, drawer.css). Scrolling still works.
+- Map starts in satellite view (map.js satelliteOn = true, Esri imagery added first; the layers button starts active and switches to OpenStreetMap).
+- Support: clicking Support in the nav bar or the menu drawer opens an overlay with Email nav.support@thapar.edu and Contact 9876543210 (menu-drawer.js, drawer.css). support.html (fallback page) now shows only those two lines, FAQs removed.
+- #role-note margin is 0.
+- Overlay, drawer, background and hidden scrollbar checked in a real browser on a test page; map default not checked (Leaflet CDN blocked in sandbox).

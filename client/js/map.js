@@ -38,13 +38,13 @@ export function createCampusMap(container, { onSelect }) {
     const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "&copy; OpenStreetMap"
-    }).addTo(map);
+    });
     const satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
         maxZoom: 19,
         maxNativeZoom: 18,
         attribution: "Imagery &copy; Esri"
-    });
-    let satelliteOn = false;
+    }).addTo(map);
+    let satelliteOn = true;
 
     function toggleSatellite() {
         satelliteOn = !satelliteOn;

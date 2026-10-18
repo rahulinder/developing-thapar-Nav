@@ -15,6 +15,7 @@ html {
 }
 
 body {
+    background-color: #f0f6fc;
     margin: 0 auto;
     padding: 0;
     width: 100%;
@@ -634,4 +635,13 @@ a {
     object-fit: cover;
     border-radius: 20px;
     background: #cfe3f5;
+}
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
