@@ -66,3 +66,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Top bar name across admin pages
 - admin/js/shell.js: top bar shows admin.displayName (falls back to username) and the profile picture on every admin page, from the saved session, then refreshes from GET /api/auth/me once per page load and re-saves the session. Not browser-tested.
+
+## Client home: shortcuts removed, satellite view
+- client/index.html and home.js: the shortcuts bar above the map is gone (client/js/shortcuts.js and ROLE_SHORTCUTS in config.js are now unused).
+- Satellite toggle (layers button under the directions button): map.js has toggleSatellite() switching between OpenStreetMap and Esri World Imagery tiles (https://server.arcgisonline.com). Not browser-tested.

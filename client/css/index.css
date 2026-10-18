@@ -98,7 +98,8 @@ body.page-home main {
     padding: 2px 10px;
 }
 
-#locate-button {
+#locate-button,
+#layer-button {
     position: absolute;
     top: 16px;
     left: 16px;
@@ -117,11 +118,13 @@ body.page-home main {
     cursor: pointer;
 }
 
-#locate-button.is-active {
+#locate-button.is-active,
+#layer-button.is-active {
     color: #0071e3;
 }
 
-#locate-button:focus-visible {
+#locate-button:focus-visible,
+#layer-button:focus-visible {
     outline: 3px solid #0071e3;
     outline-offset: 2px;
 }
@@ -315,4 +318,8 @@ body.page-home main {
 
 #shortcuts button:focus-visible {
     outline: 3px solid #0071e3;
+}
+
+#layer-button {
+    top: 120px;
 }

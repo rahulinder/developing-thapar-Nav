@@ -21,7 +21,6 @@ import { startRoute, setRouteHandler, openInGoogleMaps } from "./route.js";
 import { fetchRoute } from "./api.js";
 import { buildSteps, formatDistance } from "./directions.js";
 import { createOffRouteTracker } from "./offroute.js";
-import { buildShortcuts } from "./shortcuts.js";
 
 function main() {
     const role = requireRole();
@@ -292,6 +291,14 @@ function main() {
         planner.hidden = true;
     });
     byId("directions-button").addEventListener("click", openPlanner);
+    const layerButton = byId("layer-button");
+    layerButton.addEventListener("click", () => {
+        const satellite = map.toggleSatellite();
+        layerButton.classList.toggle("is-active", satellite);
+        layerButton.setAttribute("aria-pressed", String(satellite));
+        layerButton.setAttribute("aria-label", satellite ? "Switch to map view" : "Switch to satellite view");
+        layerButton.title = satellite ? "Map view" : "Satellite view";
+    });
 
     setRouteHandler(showRoute);
 
@@ -321,31 +328,6 @@ function main() {
         }
     }
 
-    const shortcutsNav = byId("shortcuts");
-
-    function shortcutOrigin() {
-        if (userPoint && distanceMeters(userPoint, CAMPUS_CENTER) <= CAMPUS_RADIUS_METERS) {
-            return userPoint;
-        }
-        return places.find((item) => item.isEntrance) || CAMPUS_CENTER;
-    }
-
-    function renderShortcuts() {
-        clear(shortcutsNav);
-        const items = buildShortcuts(role, places, shortcutOrigin());
-        shortcutsNav.hidden = items.length === 0;
-        for (const item of items) {
-            shortcutsNav.append(
-                el("button", {
-                    type: "button",
-                    title: `Route to ${item.place.name}`,
-                    text: item.label,
-                    onclick: () => showRoute(item.place)
-                })
-            );
-        }
-    }
-
     function renderPlaces(list) {
         places = list;
         clear(sections);
@@ -354,7 +336,6 @@ function main() {
         fromBox.setPlaces(places);
         toBox.setPlaces(places);
         updateLocationLabel();
-        renderShortcuts();
 
         if (places.length === 0) {
             sections.append(
@@ -430,14 +411,8 @@ function main() {
         }
     }
 
-    let shortcutsPoint = null;
-
     function handleFix(point) {
         userPoint = point;
-        if (!shortcutsPoint || distanceMeters(shortcutsPoint, point) > 100) {
-            shortcutsPoint = point;
-            renderShortcuts();
-        }
         updateLocationLabel();
         const onCampus = distanceMeters(point, CAMPUS_CENTER) <= CAMPUS_RADIUS_METERS;
         if (onCampus) {

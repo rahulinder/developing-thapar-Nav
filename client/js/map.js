@@ -15,7 +15,8 @@ function stubMap() {
         drawRoute() {},
         clearRoute() {},
         locate: () => Promise.resolve(null),
-        invalidate() {}
+        invalidate() {},
+        toggleSatellite: () => false
     };
 }
 
@@ -34,10 +35,28 @@ export function createCampusMap(container, { onSelect }) {
     map.attributionControl.setPosition("topright");
     map.attributionControl.setPrefix(false);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "&copy; OpenStreetMap"
     }).addTo(map);
+    const satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        maxZoom: 19,
+        maxNativeZoom: 18,
+        attribution: "Imagery &copy; Esri"
+    });
+    let satelliteOn = false;
+
+    function toggleSatellite() {
+        satelliteOn = !satelliteOn;
+        if (satelliteOn) {
+            streetLayer.remove();
+            satelliteLayer.addTo(map);
+        } else {
+            satelliteLayer.remove();
+            streetLayer.addTo(map);
+        }
+        return satelliteOn;
+    }
 
     const markers = new Map();
     let userMarker = null;
@@ -227,6 +246,7 @@ export function createCampusMap(container, { onSelect }) {
         watch,
         locate,
         invalidate,
+        toggleSatellite,
         drawRoute,
         clearRoute,
         panTo(point, zoom = DEFAULT_ZOOM) {
