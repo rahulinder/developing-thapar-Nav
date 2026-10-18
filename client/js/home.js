@@ -63,12 +63,10 @@ function main() {
         const name = getVisitorName();
         const note = byId("role-note");
         clear(note);
-        note.append(
-            el("span", {
-                text: `${name ? `Hi ${name}. ` : ""}Showing places for ${ROLES[role].plural}.`
-            }),
-            el("a", { href: "user-option.html?next=index.html", text: "Change" })
-        );
+        note.hidden = !name;
+        if (name) {
+            note.append(el("span", { text: `Hi ${name}` }));
+        }
     }
 
     function updateLocationLabel() {

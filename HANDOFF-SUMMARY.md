@@ -78,3 +78,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - The committed repo referenced files that were not committed: admin/js/user-data-page.js (page stayed on Loading), backend/src/models/Client.js plus its export in models/index.js (controller uses Client), and client-side visit registration.
 - Added: user-data-page.js (tabs All/Registered/Guests, search, user type filter, Load more, calls GET /api/clients); Client model (clientId, userType, name, contact, isGuest, visitCount, lastSeenAt); client/js/visits.js (random clientId in localStorage, POST /api/clients/ping once per session and role); roles.js requireRole calls registerVisit; login-page.js now reads name and contact (validated phone or email) and the guest button clears both. client/js/config.js is untouched.
 - Not tested against Atlas or a browser.
+
+## Client: greeting and menu drawer
+- #role-note on the home page now shows only "Hi <name>" (larger, 32px, bold) and is hidden when there is no name; the user type text and Change link are removed (change user type is still in the menu).
+- Menu button (nav bar on index.html and places.html) opens a drawer that slides in from the right covering 75% of the page, same items as menu.html (Home, Change user type, Support, Logout), with a backdrop, close button and Escape to close. Files: client/js/menu-drawer.js, client/css/drawer.css. menu.html still exists as a fallback. Drawer open/close checked in a real browser with a test page; not checked on the real pages.

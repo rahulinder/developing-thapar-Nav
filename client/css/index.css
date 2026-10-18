@@ -76,9 +76,15 @@ body.page-home main {
     display: flex;
     flex-wrap: wrap;
     gap: 4px 12px;
-    margin: 0 8px;
-    font-size: 15px;
-    color: #44505c;
+    margin: 8px 8px 0;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #0d1117;
+}
+
+#role-note[hidden] {
+    display: none;
 }
 
 #role-note a {
