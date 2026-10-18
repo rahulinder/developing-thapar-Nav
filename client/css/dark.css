@@ -1,0 +1,224 @@
+html[data-theme="dark"] {
+    color-scheme: dark;
+    background-color: #0d1117;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] body.page-places {
+    background-color: #0d1117;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #logo-and-search {
+    background-color: #010409;
+}
+
+html[data-theme="dark"] #search-suggestions,
+html[data-theme="dark"] .state-card,
+html[data-theme="dark"] #route-steps,
+html[data-theme="dark"] #route-planner,
+html[data-theme="dark"] .planner-list {
+    background: #161b22;
+    color: #f0f6fc;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] .suggestion.is-active {
+    background: #232b36;
+}
+
+html[data-theme="dark"] .suggestion-empty,
+html[data-theme="dark"] .suggestion-category,
+html[data-theme="dark"] .state-card p,
+html[data-theme="dark"] .panel-alt,
+html[data-theme="dark"] .panel-facts dt,
+html[data-theme="dark"] #route-steps .step-distance,
+html[data-theme="dark"] #result-count {
+    color: #a3afbd;
+}
+
+html[data-theme="dark"] #status,
+html[data-theme="dark"] #route-banner {
+    background: #1b2635;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #status[data-tone="warn"] {
+    background: #4a3c10;
+}
+
+html[data-theme="dark"] #route-banner[data-tone="error"] {
+    background: #4a1d1d;
+}
+
+html[data-theme="dark"] .status-action,
+html[data-theme="dark"] .state-action,
+html[data-theme="dark"] .card-details .route-button,
+html[data-theme="dark"] .panel-button.primary,
+html[data-theme="dark"] .hostel-category-buttons {
+    background: #f0f6fc;
+    border-color: #f0f6fc;
+    color: #0d1117;
+}
+
+html[data-theme="dark"] .hostel-category-buttons[aria-pressed="true"] {
+    background-color: #cf0000;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .panel-button.secondary {
+    border-color: #f0f6fc;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #nav-bar {
+    background-color: #1c2430;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] .cards {
+    background-color: #1c2430;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] .card-badge {
+    background: #161b22;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] .card-details {
+    background-color: #161b22;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] .card-details .location-name,
+html[data-theme="dark"] .skeleton-title,
+html[data-theme="dark"] .horizontal-scroll-titles,
+html[data-theme="dark"] .panel-facts,
+html[data-theme="dark"] #hostel-category {
+    border-color: #f0f6fc;
+}
+
+html[data-theme="dark"] #hostel-category {
+    background-color: #0d1117;
+}
+
+html[data-theme="dark"] .cards.skeleton,
+html[data-theme="dark"] .skeleton-line,
+html[data-theme="dark"] .live-map-background {
+    background-color: #1c2430;
+}
+
+html[data-theme="dark"] .cards.skeleton,
+html[data-theme="dark"] .skeleton-line {
+    background-image: linear-gradient(90deg, #1c2430 25%, #28323f 50%, #1c2430 75%);
+    background-size: 200% 100%;
+}
+
+html[data-theme="dark"] #place-panel {
+    background: #161b22;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #place-panel::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+html[data-theme="dark"] .panel-handle {
+    background: #3a4452;
+}
+
+html[data-theme="dark"] .panel-close {
+    background: rgba(22, 27, 34, 0.9);
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] .panel-photo {
+    background: #232b36;
+}
+
+html[data-theme="dark"] #role-note {
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #role-note a,
+html[data-theme="dark"] #support-overlay a {
+    color: #6cb2ff;
+}
+
+html[data-theme="dark"] #layer-button,
+html[data-theme="dark"] #directions-button,
+html[data-theme="dark"] #locate-button {
+    background: #161b22;
+    color: #c4cdd8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] #layer-button.is-active {
+    color: #6cb2ff;
+}
+
+html[data-theme="dark"] #route-banner button,
+html[data-theme="dark"] #route-planner button,
+html[data-theme="dark"] #shortcuts button,
+html[data-theme="dark"] .planner-form input {
+    background: #161b22;
+    color: #f0f6fc;
+    border-color: #3a4452;
+}
+
+html[data-theme="dark"] .planner-form input::placeholder {
+    color: #8a96a5;
+}
+
+html[data-theme="dark"] #home-map .leaflet-control-attribution,
+html[data-theme="dark"] #home-map .leaflet-bar a {
+    background: rgba(22, 27, 34, 0.85);
+    color: #c4cdd8;
+}
+
+html[data-theme="dark"] #home-map:has(#layer-button:not(.is-active)) .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}
+
+html[data-theme="dark"] #menu-drawer,
+html[data-theme="dark"] #support-overlay {
+    background-color: #161b22;
+    color: #f0f6fc;
+}
+
+html[data-theme="dark"] #menu-drawer h1,
+html[data-theme="dark"] #menu-options h1,
+html[data-theme="dark"] h1 {
+    border-color: #f0f6fc;
+}
+
+html[data-theme="dark"] #menu-drawer .drawer-close img,
+html[data-theme="dark"] #menu-close img,
+html[data-theme="dark"] .close-link img,
+html[data-theme="dark"] .support-close img {
+    filter: invert(1);
+}
+
+html[data-theme="dark"] #menu-backdrop,
+html[data-theme="dark"] #support-backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+html[data-theme="dark"] #credentials-card {
+    background-color: #161b22;
+}
+
+html[data-theme="dark"] #credentials-card input {
+    background-color: #0d1117;
+    color: #f0f6fc;
+    border-color: #3a4452;
+}
+
+html[data-theme="dark"] .role-option {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="dark"] body:has(#credentials-card) {
+    background-image: url(../assets/client-interface/doodle-dark-1.svg);
+}

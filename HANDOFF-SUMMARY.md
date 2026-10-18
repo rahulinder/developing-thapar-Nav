@@ -90,3 +90,10 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Support: clicking Support in the nav bar or the menu drawer opens an overlay with Email nav.support@thapar.edu and Contact 9876543210 (menu-drawer.js, drawer.css). support.html (fallback page) now shows only those two lines, FAQs removed.
 - #role-note margin is 0.
 - Overlay, drawer, background and hidden scrollbar checked in a real browser on a test page; map default not checked (Leaflet CDN blocked in sandbox).
+
+## Client: dark mode
+- New client/css/dark.css (all overrides under html[data-theme="dark"], light styles untouched) and client/js/theme.js (plain script, loaded in the head of index, places, login, menu, support, user-option so there is no light flash).
+- Default follows the phone/computer setting (prefers-color-scheme) until the user chooses; the choice is saved in localStorage key thaparNav.theme ("dark" or "light").
+- Toggle: "Dark mode" / "Light mode" item in the menu drawer (menu-drawer.js) and on menu.html (menu-page.js), placed above Logout.
+- Dark map view inverts the OpenStreetMap tiles only; satellite imagery is never inverted (uses :has()). Login logo swaps to the white-name version and the dark doodle is used on the login page.
+- Checked in a real browser: login, role page, menu, drawer, home page layout, persistence across pages, no console errors. Not checked: the map tiles (Leaflet CDN blocked in the sandbox), places and place panel with real data, real phones.
