@@ -101,3 +101,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Client: greeting above the map
 - #role-note now sits directly under the search header, above the status line, route banner and map (client/index.html); margin 0, padding 8px 16px 0 so it does not touch the screen edge (client/css/index.css). Not browser-tested.
 - Admin dark mode idea is dropped (already removed in the repo).
+
+## Route button radius
+- client/css/base.css: .card-details .route-button border-radius is now 32px (was 16px).
