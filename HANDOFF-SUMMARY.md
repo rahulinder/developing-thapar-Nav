@@ -97,9 +97,3 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Toggle: "Dark mode" / "Light mode" item in the menu drawer (menu-drawer.js) and on menu.html (menu-page.js), placed above Logout.
 - Dark map view inverts the OpenStreetMap tiles only; satellite imagery is never inverted (uses :has()). Login logo swaps to the white-name version and the dark doodle is used on the login page.
 - Checked in a real browser: login, role page, menu, drawer, home page layout, persistence across pages, no console errors. Not checked: the map tiles (Leaflet CDN blocked in the sandbox), places and place panel with real data, real phones.
-
-## Admin: dark mode
-- New admin/css/dark.css (overrides under html[data-theme="dark"]; light styles untouched) and admin/js/theme.js (plain script in the head of every admin page except the two login overlay fragments).
-- Follows the system setting until the admin chooses; choice saved in localStorage key thaparNavAdmin.theme. Toggle is a new "Dark mode"/"Light mode" item (moon icon, assets/admin-panel/side-bar/theme.svg) in side-bar.html above Logout.
-- Page background #010409, cards #0d1117, inner panels/inputs #1c2430/#0d1117. Login logo swaps to the white-name version.
-- Checked in a real browser with a stubbed API: dashboard, user data, account settings, places, login, toggle and persistence, no console errors. Not checked: campus-data, accommodations, import and path-editor pages (selectors written from their CSS only), the path-editor map, the two login overlay pages (left light), real backend, real phones.
