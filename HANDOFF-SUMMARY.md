@@ -97,3 +97,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Toggle: "Dark mode" / "Light mode" item in the menu drawer (menu-drawer.js) and on menu.html (menu-page.js), placed above Logout.
 - Dark map view inverts the OpenStreetMap tiles only; satellite imagery is never inverted (uses :has()). Login logo swaps to the white-name version and the dark doodle is used on the login page.
 - Checked in a real browser: login, role page, menu, drawer, home page layout, persistence across pages, no console errors. Not checked: the map tiles (Leaflet CDN blocked in the sandbox), places and place panel with real data, real phones.
+
+## Client: greeting above the map
+- #role-note now sits directly under the search header, above the status line, route banner and map (client/index.html); margin 0, padding 8px 16px 0 so it does not touch the screen edge (client/css/index.css). Not browser-tested.
+- Admin dark mode idea is dropped (already removed in the repo).
