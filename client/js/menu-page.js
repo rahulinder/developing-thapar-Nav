@@ -13,13 +13,3 @@ document.getElementById("logout-button").addEventListener("click", () => {
     clearVisitorName();
     window.location.href = "login.html";
 });
-
-const themeButton = document.getElementById("theme-button");
-const themeLabel = themeButton.querySelector("h1");
-themeLabel.textContent = window.ThaparTheme.label();
-themeButton.addEventListener("click", () => {
-    window.ThaparTheme.toggle();
-});
-document.addEventListener("themechange", () => {
-    themeLabel.textContent = window.ThaparTheme.label();
-});

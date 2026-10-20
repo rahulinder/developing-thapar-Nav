@@ -35,15 +35,12 @@ closeButton.append(closeIcon);
 head.append(closeButton);
 
 const logout = item("button", { type: "button", className: "drawer-item" }, "Logout");
-const themeToggle = item("button", { type: "button", className: "drawer-item" }, window.ThaparTheme.label());
-const themeLabel = themeToggle.querySelector("h1");
 
 drawer.append(
     head,
     item("a", { href: "index.html" }, "Home"),
     item("a", { href: "user-option.html?next=index.html" }, "Change user type"),
     item("a", { href: "support.html" }, "Support"),
-    themeToggle,
     logout
 );
 document.body.append(backdrop, drawer);
@@ -148,12 +145,4 @@ logout.addEventListener("click", () => {
     clearRole();
     clearVisitorName();
     window.location.href = "login.html";
-});
-
-themeToggle.addEventListener("click", () => {
-    window.ThaparTheme.toggle();
-});
-
-document.addEventListener("themechange", () => {
-    themeLabel.textContent = window.ThaparTheme.label();
 });

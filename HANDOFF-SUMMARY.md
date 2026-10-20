@@ -122,3 +122,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Icons needed in admin/assets/admin-panel/dashboard/ (exported from Figma by the user, 36x36): shops-icon.png (node 267:1950), parks-icon.svg (267:1953), classes-icon.svg (267:1957), visitors-icon.svg (267:1961). The sandbox cannot download Figma assets, so these files are NOT in the zip; Hostels reuses boys-hostel.svg.
 - Links are guesses: Shops -> category=food, Parks -> category=other, Classes -> category=academic, Visitors -> user-data.html.
 - Checked in a real browser with placeholder icons; not checked with login.
+
+## Client dark mode removed
+- Removed the theme.js script tag from index, login, menu, places, support and user-option html, the Dark mode button from menu.html and the menu drawer (menu-drawer.js, menu-page.js). The client is light only again.
+- DELETE these now-unused files from your project: client/js/theme.js and client/css/dark.css.
+- Not browser-tested.
