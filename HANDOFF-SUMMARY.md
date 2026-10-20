@@ -126,3 +126,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Dashboard: two columns
 - admin/css/dashboard.css: .quick-cards grid is exactly 2 columns of 256px.
 - Icons still missing from the repo: shops-icon.png, parks-icon.svg, classes-icon.svg, visitors-icon.svg must be exported from Figma by the user into admin/assets/admin-panel/dashboard/ (Figma assets cannot be downloaded in the sandbox and copying image data by hand corrupts it).
+
+## Admin path editor: satellite default
+- admin/js/path-page.js: the map (drawing walkways and junctions) now opens in Esri World Imagery satellite view (max native zoom 18, stretched to 20); a Satellite / Map switch (Leaflet layer control, top right) swaps back to OpenStreetMap. Not browser-tested (Leaflet CDN blocked in sandbox).

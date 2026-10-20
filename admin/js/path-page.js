@@ -552,7 +552,9 @@ async function load() {
 function start() {
     map = L.map("map", { center: [CAMPUS_CENTER.lat, CAMPUS_CENTER.lng], zoom: MAP_ZOOM, maxZoom: 20, doubleClickZoom: false });
     map.attributionControl.setPrefix(false);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, maxNativeZoom: 19, attribution: "&copy; OpenStreetMap" }).addTo(map);
+    const satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 20, maxNativeZoom: 18, attribution: "Imagery &copy; Esri" }).addTo(map);
+    const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, maxNativeZoom: 19, attribution: "&copy; OpenStreetMap" });
+    L.control.layers({ Satellite: satelliteLayer, Map: streetLayer }, null, { position: "topright", collapsed: false }).addTo(map);
     walkLayer = L.layerGroup().addTo(map);
     placeLayer = L.layerGroup().addTo(map);
     junctionLayer = L.layerGroup().addTo(map);
