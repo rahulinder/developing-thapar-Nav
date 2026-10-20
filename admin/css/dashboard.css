@@ -27,7 +27,7 @@ body{
 .quick-cards {
   display: grid;
   flex: 1;
-  grid-template-columns: repeat(auto-fill, 256px);
+  grid-template-columns: repeat(2, 256px);
   gap: 16px;
   justify-content: center;
   padding: 16px;

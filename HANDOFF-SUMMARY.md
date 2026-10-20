@@ -123,7 +123,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Links are guesses: Shops -> category=food, Parks -> category=other, Classes -> category=academic, Visitors -> user-data.html.
 - Checked in a real browser with placeholder icons; not checked with login.
 
-## Client dark mode removed
-- Removed the theme.js script tag from index, login, menu, places, support and user-option html, the Dark mode button from menu.html and the menu drawer (menu-drawer.js, menu-page.js). The client is light only again.
-- DELETE these now-unused files from your project: client/js/theme.js and client/css/dark.css.
-- Not browser-tested.
+## Dashboard: two columns
+- admin/css/dashboard.css: .quick-cards grid is exactly 2 columns of 256px.
+- Icons still missing from the repo: shops-icon.png, parks-icon.svg, classes-icon.svg, visitors-icon.svg must be exported from Figma by the user into admin/assets/admin-panel/dashboard/ (Figma assets cannot be downloaded in the sandbox and copying image data by hand corrupts it).
