@@ -104,3 +104,10 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Route button radius
 - client/css/base.css: .card-details .route-button border-radius is now 32px (was 16px).
+
+## Dashboard quick cards (from Figma)
+- Figma file NxHqkY7QE851D9kvQECtyp, frames 267:1940 (default) to 267:1944 (hover). Figma exposed no keyframe data, so the transition is built from the two frames: 0.4s ease (assumed).
+- admin/dashboard.html: the content inside #main-container is replaced by a .quick-cards grid (top bar and sidebar untouched, shell.js still loads them). One card so far: Hostels, links to places-data.html?category=hostel. Inter 700 font link added.
+- admin/css/dashboard.css: old dashboard content styles (search bar, stats, quick links, etc.) removed; new .quick-card styles. Card 256x160, radius 32, gradient 58deg to 238deg on hover/focus (animated with @property --card-angle), title slides 35px right, icon slides up from below the card.
+- The icon uses the existing assets/admin-panel/dashboard/boys-hostel.svg (looks identical to the design); the Figma asset URL could not be downloaded from the sandbox.
+- Checked in a real browser on a test page (both states match the frames); not checked with login and shell.js.
