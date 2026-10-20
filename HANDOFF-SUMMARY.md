@@ -111,3 +111,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - admin/css/dashboard.css: old dashboard content styles (search bar, stats, quick links, etc.) removed; new .quick-card styles. Card 256x160, radius 32, gradient 58deg to 238deg on hover/focus (animated with @property --card-angle), title slides 35px right, icon slides up from below the card.
 - The icon uses the existing assets/admin-panel/dashboard/boys-hostel.svg (looks identical to the design); the Figma asset URL could not be downloaded from the sandbox.
 - Checked in a real browser on a test page (both states match the frames); not checked with login and shell.js.
+
+## Dashboard: #main-container removed
+- admin/dashboard.html: .quick-cards now sits directly in #dashboard-body next to the sidebar; the #main-container wrapper and its dark panel styles are gone from dashboard.html and dashboard.css (no other admin file used it from dashboard.css).
+- Not browser-tested with login.
