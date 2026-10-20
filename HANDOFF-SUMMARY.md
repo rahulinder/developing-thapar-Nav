@@ -115,3 +115,10 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Dashboard: #main-container removed
 - admin/dashboard.html: .quick-cards now sits directly in #dashboard-body next to the sidebar; the #main-container wrapper and its dark panel styles are gone from dashboard.html and dashboard.css (no other admin file used it from dashboard.css).
 - Not browser-tested with login.
+
+## Dashboard: five quick cards (from Figma)
+- Frames (default -> hover): Shops 267:1931->1948, Parks & Grounds 267:1926->1951, Classes 267:1935->1955, Visitors 267:1921->1959 (plus Hostels from before).
+- admin/dashboard.html: five .quick-card links; admin/css/dashboard.css: per-card custom properties (colors, gradient angles, icon hover position). Parks, Classes and Visitors start at 238deg and flip to 58deg on hover (Hostels and Shops are the opposite). Shops icon rests at top 60px on hover, the others at 57px.
+- Icons needed in admin/assets/admin-panel/dashboard/ (exported from Figma by the user, 36x36): shops-icon.png (node 267:1950), parks-icon.svg (267:1953), classes-icon.svg (267:1957), visitors-icon.svg (267:1961). The sandbox cannot download Figma assets, so these files are NOT in the zip; Hostels reuses boys-hostel.svg.
+- Links are guesses: Shops -> category=food, Parks -> category=other, Classes -> category=academic, Visitors -> user-data.html.
+- Checked in a real browser with placeholder icons; not checked with login.

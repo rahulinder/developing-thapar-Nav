@@ -41,7 +41,8 @@ body{
   border-radius: 32px;
   color: #ffffff;
   text-decoration: none;
-  background-image: linear-gradient(var(--card-angle), #0d1117 0%, #03204b 100%);
+  --card-angle: var(--angle-from, 58deg);
+  background-image: linear-gradient(var(--card-angle), var(--color-start, #0d1117) 0%, var(--color-end, #03204b) 100%);
   transition: --card-angle 0.4s ease;
 }
 .quick-card-title {
@@ -61,16 +62,16 @@ body{
 }
 .quick-card-icon {
   position: absolute;
-  top: 57px;
+  top: var(--icon-top, 57px);
   left: 64px;
   width: 36px;
   height: 36px;
-  transform: translateY(113px);
+  transform: translateY(calc(170px - var(--icon-top, 57px)));
   transition: transform 0.4s ease;
 }
 .quick-card:hover,
 .quick-card:focus-visible {
-  --card-angle: 238deg;
+  --card-angle: var(--angle-to, 238deg);
 }
 .quick-card:hover .quick-card-title,
 .quick-card:focus-visible .quick-card-title {
@@ -79,6 +80,30 @@ body{
 .quick-card:hover .quick-card-icon,
 .quick-card:focus-visible .quick-card-icon {
   transform: translateY(0);
+}
+
+.quick-card--shops {
+  --color-start: #943e00;
+  --color-end: #ff6e06;
+  --icon-top: 60px;
+}
+.quick-card--parks {
+  --angle-from: 238deg;
+  --angle-to: 58deg;
+  --color-start: #56c01e;
+  --color-end: #285a0e;
+}
+.quick-card--classes {
+  --angle-from: 238deg;
+  --angle-to: 58deg;
+  --color-start: #c32828;
+  --color-end: #5d1313;
+}
+.quick-card--visitors {
+  --angle-from: 238deg;
+  --angle-to: 58deg;
+  --color-start: #ff9d00;
+  --color-end: #995e00;
 }
 .quick-card:focus-visible {
   outline: 3px solid #0071e3;
