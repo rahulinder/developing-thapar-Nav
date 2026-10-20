@@ -129,3 +129,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Admin path editor: satellite default
 - admin/js/path-page.js: the map (drawing walkways and junctions) now opens in Esri World Imagery satellite view (max native zoom 18, stretched to 20); a Satellite / Map switch (Leaflet layer control, top right) swaps back to OpenStreetMap. Not browser-tested (Leaflet CDN blocked in sandbox).
+
+## Admin: sidebar icon centring
+- admin/css/side-bar.css: .icons-img margin-left changed from 18px to 20px so the 32px icon is centred in the 72px collapsed button. Measured in a real browser: all five icons now have 0px horizontal offset.
