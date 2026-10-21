@@ -54,7 +54,12 @@ form.addEventListener("submit", (event) => {
     finish();
 });
 
-document.getElementById("skip-btn").addEventListener("click", () => {
+const skipButton = document.getElementById("skip-btn");
+if (role === "student" || role === "staff") {
+    skipButton.textContent = "Skip";
+}
+
+skipButton.addEventListener("click", () => {
     setVisitorName("");
     setContact("");
     setRollNo("");
