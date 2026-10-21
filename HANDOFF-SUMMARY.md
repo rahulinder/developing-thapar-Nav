@@ -153,3 +153,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Route hides bars
 - Search-icon collapse removed. While #route-banner is visible the top bar and nav bar are hidden and the map fills the viewport (index.css), same as expanded; the card sits at the bottom.
+
+## Welcome typewriter
+- #role-note types "Hi <name>, Welcome to Thapar" once, then fades and hides. Flag thaparNav.welcomed in localStorage (home.js, index.css) stops it from ever showing again.

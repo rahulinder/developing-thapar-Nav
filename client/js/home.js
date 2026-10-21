@@ -9,6 +9,7 @@ import {
 } from "./config.js";
 import { byId, clear, el, prefersReducedMotion } from "./dom.js";
 import { requireRole, getVisitorName } from "./roles.js";
+import { storage } from "./storage.js";
 import { createStatusBar } from "./status-bar.js";
 import { createLoader } from "./places-store.js";
 import { createSearchBox } from "./search-box.js";
@@ -21,6 +22,8 @@ import { startRoute, setRouteHandler, openInGoogleMaps } from "./route.js";
 import { fetchRoute } from "./api.js";
 import { buildSteps, formatDistance } from "./directions.js";
 import { createOffRouteTracker } from "./offroute.js";
+
+const WELCOME_KEY = "thaparNav.welcomed";
 
 function main() {
     const role = requireRole();
@@ -71,13 +74,42 @@ function main() {
     });
 
     function renderRoleNote() {
-        const name = getVisitorName();
         const note = byId("role-note");
         clear(note);
-        note.hidden = !name;
-        if (name) {
-            note.append(el("span", { text: `Hi ${name}` }));
+        note.hidden = true;
+        if (storage.get(WELCOME_KEY)) {
+            return;
         }
+        storage.set(WELCOME_KEY, true);
+        const name = getVisitorName();
+        const text = name ? `Hi ${name}, Welcome to Thapar` : "Welcome to Thapar";
+        const span = el("span", { class: "welcome-text" });
+        note.append(span);
+        note.hidden = false;
+        const finish = () => {
+            note.classList.add("is-leaving");
+            window.setTimeout(() => {
+                note.hidden = true;
+                clear(note);
+                note.classList.remove("is-leaving");
+            }, 500);
+        };
+        if (prefersReducedMotion()) {
+            span.textContent = text;
+            window.setTimeout(finish, 2500);
+            return;
+        }
+        note.classList.add("is-typing");
+        let count = 0;
+        const timer = window.setInterval(() => {
+            count += 1;
+            span.textContent = text.slice(0, count);
+            if (count >= text.length) {
+                window.clearInterval(timer);
+                note.classList.remove("is-typing");
+                window.setTimeout(finish, 1500);
+            }
+        }, 60);
     }
 
     function updateLocationLabel() {
