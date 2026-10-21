@@ -19,9 +19,13 @@
             <label for="visitor-name" class="visually-hidden">Your name</label>
             <input id="visitor-name" type="text" placeholder="Name" maxlength="40" autocomplete="name" required>
         </span>
-        <span>
+        <span id="contact-field">
             <label for="visitor-contact" class="visually-hidden">Phone number or email</label>
             <input id="visitor-contact" type="text" placeholder="Phone or email" maxlength="80" autocomplete="tel" required>
+        </span>
+        <span id="roll-field" hidden>
+            <label for="visitor-roll" class="visually-hidden">Roll number</label>
+            <input id="visitor-roll" type="text" placeholder="Roll number" maxlength="15" autocomplete="off" autocapitalize="characters">
         </span>
         <span>
             <button type="submit">Continue</button>

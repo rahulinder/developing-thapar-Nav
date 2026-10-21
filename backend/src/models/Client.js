@@ -7,6 +7,7 @@ const clientSchema = new mongoose.Schema(
         userType: { type: String, enum: ROLES, required: true },
         name: { type: String, trim: true, maxlength: 40, default: "" },
         contact: { type: String, trim: true, maxlength: 80, default: "" },
+        rollNo: { type: String, trim: true, uppercase: true, maxlength: 15, default: "" },
         isGuest: { type: Boolean, default: true },
         visitCount: { type: Number, default: 1 },
         lastSeenAt: { type: Date, default: Date.now }

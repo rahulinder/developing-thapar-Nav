@@ -6,6 +6,8 @@ const ping = asyncHandler(async (req, res) => {
     const { clientId, userType } = req.body;
     const name = String(req.body.name || "").trim();
     const contact = String(req.body.contact || "").trim();
+    const rollNo = String(req.body.rollNo || "").trim().toUpperCase();
+    const identified = Boolean(name && (userType === "student" ? rollNo : contact));
 
     const existing = await Client.findOne({ clientId });
     if (!existing) {
@@ -13,16 +15,18 @@ const ping = asyncHandler(async (req, res) => {
             clientId,
             userType,
             name,
-            contact,
-            isGuest: !(name && contact)
+            contact: identified && userType !== "student" ? contact : "",
+            rollNo: identified && userType === "student" ? rollNo : "",
+            isGuest: !identified
         });
         return res.status(201).json({ ok: true });
     }
 
     existing.userType = userType;
-    if (name && contact) {
+    if (identified) {
         existing.name = name;
-        existing.contact = contact;
+        existing.contact = userType === "student" ? "" : contact;
+        existing.rollNo = userType === "student" ? rollNo : "";
         existing.isGuest = false;
     }
     existing.visitCount += 1;
@@ -45,7 +49,7 @@ const list = asyncHandler(async (req, res) => {
     const q = String(req.query.q || "").trim();
     if (q) {
         const pattern = new RegExp(escapeRegex(q), "i");
-        filter.$or = [{ name: pattern }, { contact: pattern }];
+        filter.$or = [{ name: pattern }, { contact: pattern }, { rollNo: pattern }];
     }
 
     const [clients, total, registered, guests] = await Promise.all([

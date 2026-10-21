@@ -43,7 +43,7 @@ function addRow(client) {
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", () => removeUser(client, removeButton));
     actionCell.append(removeButton);
-    row.append(nameCell, cell(client.contact || "-", "muted"), cell(TYPE_LABELS[client.userType] || client.userType), cell(formatDate(client.createdAt), "muted"), actionCell);
+    row.append(nameCell, cell(client.rollNo || client.contact || "-", "muted"), cell(TYPE_LABELS[client.userType] || client.userType), cell(formatDate(client.createdAt), "muted"), actionCell);
     body.append(row);
 }
 

@@ -14,6 +14,7 @@ function createClientsRouter({ writeLimiter }) {
         body("clientId").isString().bail().matches(/^[A-Za-z0-9-]{16,64}$/).withMessage("Invalid client id"),
         body("userType").isString().bail().isIn(ROLES).withMessage("Unknown user type"),
         body("name").optional({ values: "falsy" }).isString().bail().trim().isLength({ max: 40 }).withMessage("Name is too long"),
+        body("rollNo").optional({ values: "falsy" }).isString().bail().trim().matches(/^[A-Za-z0-9]{5,15}$/).withMessage("Invalid roll number"),
         body("contact").optional({ values: "falsy" }).isString().bail().trim().matches(CONTACT).withMessage("Contact must be a phone number or email")
     ];
 

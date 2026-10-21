@@ -159,3 +159,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Remove user
 - DELETE /api/clients/:id (admin, Mongo id) deletes the Client record; 404 if missing. User Data page has a Remove button per row with a confirm dialog and then reloads the list. Note: a removed person's device is not blocked and re-registers on its next visit.
+
+## Role first, then login; roll number for students
+- Flow: no role -> user-option.html -> (first choice only) login.html -> next. thaparNav.pendingLogin flag (roles.js) sends role-chosen-but-not-logged-in users to login; existing users are unaffected. Change user type from the menu skips login. Logout goes to user-option.html.
+- Students are asked for a roll number (5-15 letters/digits, stored uppercase as thaparNav.rollNo); others give phone or email. Profile page row switches between Contact and Roll no. by role.
+- Backend: Client.rollNo; POST /api/clients/ping accepts rollNo; students need name + rollNo to count as registered, others name + contact; list search also matches rollNo. Admin User Data shows roll no. or contact in one column.
+- Deploy backend and admin along with the client.

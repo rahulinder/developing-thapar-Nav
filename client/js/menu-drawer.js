@@ -145,5 +145,5 @@ document.addEventListener("keydown", (event) => {
 logout.addEventListener("click", () => {
     clearRole();
     clearVisitorName();
-    window.location.href = "login.html";
+    window.location.href = "user-option.html?next=index.html";
 });

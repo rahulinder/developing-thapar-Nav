@@ -4,11 +4,30 @@ import { storage } from "./storage.js";
 const ID_KEY = "thaparNav.clientId";
 const NAME_KEY = "thaparNav.name";
 const CONTACT_KEY = "thaparNav.contact";
+const ROLL_KEY = "thaparNav.rollNo";
 const SENT_KEY = "thaparNav.visitSent";
 const CONTACT_PATTERN = /^([^\s@]+@[^\s@]+\.[^\s@]+|\+?[0-9][0-9\s-]{6,18}[0-9])$/;
 
 export function isValidContact(value) {
     return CONTACT_PATTERN.test(String(value || "").trim());
+}
+
+export function isValidRollNo(value) {
+    return /^[A-Za-z0-9]{5,15}$/.test(String(value || "").trim());
+}
+
+export function getRollNo() {
+    const value = storage.get(ROLL_KEY);
+    return typeof value === "string" ? value : "";
+}
+
+export function setRollNo(value) {
+    const clean = String(value || "").trim().toUpperCase().slice(0, 15);
+    if (clean) {
+        storage.set(ROLL_KEY, clean);
+    } else {
+        storage.remove(ROLL_KEY);
+    }
 }
 
 export function getContact() {
@@ -46,11 +65,21 @@ function getClientId() {
 
 function sendPing(role) {
     const name = storage.get(NAME_KEY);
-    const contact = getContact();
     const body = { clientId: getClientId(), userType: role };
-    if (typeof name === "string" && name.trim() && isValidContact(contact)) {
-        body.name = name.trim();
-        body.contact = contact;
+    if (typeof name === "string" && name.trim()) {
+        if (role === "student") {
+            const rollNo = getRollNo();
+            if (isValidRollNo(rollNo)) {
+                body.name = name.trim();
+                body.rollNo = rollNo;
+            }
+        } else {
+            const contact = getContact();
+            if (isValidContact(contact)) {
+                body.name = name.trim();
+                body.contact = contact;
+            }
+        }
     }
     fetch(API_BASE_URL + API_PREFIX + "/clients/ping", {
         method: "POST",
