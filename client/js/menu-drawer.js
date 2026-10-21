@@ -39,6 +39,7 @@ const logout = item("button", { type: "button", className: "drawer-item" }, "Log
 drawer.append(
     head,
     item("a", { href: "index.html" }, "Home"),
+    item("a", { href: "profile.html" }, "Profile"),
     item("a", { href: "user-option.html?next=index.html" }, "Change user type"),
     item("a", { href: "support.html" }, "Support"),
     logout

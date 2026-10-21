@@ -44,15 +44,7 @@ function getClientId() {
     return fresh;
 }
 
-export function registerVisit(role) {
-    try {
-        if (window.sessionStorage.getItem(SENT_KEY) === role) {
-            return;
-        }
-        window.sessionStorage.setItem(SENT_KEY, role);
-    } catch {
-        return;
-    }
+function sendPing(role) {
     const name = storage.get(NAME_KEY);
     const contact = getContact();
     const body = { clientId: getClientId(), userType: role };
@@ -66,4 +58,24 @@ export function registerVisit(role) {
         body: JSON.stringify(body),
         keepalive: true
     }).catch(() => {});
+}
+
+export function registerVisit(role) {
+    try {
+        if (window.sessionStorage.getItem(SENT_KEY) === role) {
+            return;
+        }
+        window.sessionStorage.setItem(SENT_KEY, role);
+    } catch {
+        return;
+    }
+    sendPing(role);
+}
+
+export function syncVisit(role) {
+    try {
+        window.sessionStorage.setItem(SENT_KEY, role);
+    } catch {
+    }
+    sendPing(role);
 }

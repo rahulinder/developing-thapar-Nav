@@ -132,3 +132,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Admin: sidebar icon centring
 - admin/css/side-bar.css: .icons-img margin-left changed from 18px to 20px so the 32px icon is centred in the 72px collapsed button. Measured in a real browser: all five icons now have 0px horizontal offset.
+
+## Client Profile page
+- New: client/profile.html, client/css/profile.css, client/js/profile-page.js
+- Changed: client/js/visits.js (adds syncVisit), client/js/menu-drawer.js and client/menu.html (Profile link)
+- Shows Name, Contact, User type, each with an Edit button. Saves to this device and updates the admin User Data list.
