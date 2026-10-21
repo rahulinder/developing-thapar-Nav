@@ -137,3 +137,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - New: client/profile.html, client/css/profile.css, client/js/profile-page.js
 - Changed: client/js/visits.js (adds syncVisit), client/js/menu-drawer.js and client/menu.html (Profile link)
 - Shows Name, Contact, User type, each with an Edit button. Saves to this device and updates the admin User Data list.
+
+## Route card in map, top bar gradient
+- #role-note moved inside #cards-section so it scrolls away with content.
+- Route banner, steps and planner now live inside .card-details in the map container (index.html, index.css). The map container grows to 80dvh while #route-banner is visible (CSS :has); Leaflet resizes via the existing ResizeObserver.
+- Client top bar uses linear-gradient(to right, #0d1117, #001636) instead of the doodle image (base.css).

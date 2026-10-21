@@ -58,10 +58,7 @@ a {
     margin: 0;
     padding: 8px 16px;
     background-color: #0d1117;
-    background-image: url(../assets/client-interface/doodle-dark-1.svg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: top;
+    background: linear-gradient(to right, #0d1117, #001636);
 }
 
 #logo {
