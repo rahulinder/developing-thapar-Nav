@@ -147,3 +147,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Page now scrolls as a whole (html overflow and fixed heights removed in index.css) so the mobile browser bar can hide; top bar is sticky.
 - While a route is active the search bar collapses to a #search-toggle icon; tapping it reopens the bar (body.search-open, home.js).
 - #expand-button toggles #home-map.is-expanded (about full screen height).
+
+## Expanded map hides bars
+- body.map-expanded hides #logo-and-search and #nav-bar; the map fills the viewport (index.css, home.js).

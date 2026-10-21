@@ -183,11 +183,10 @@ body.page-home #logo-and-search {
 
 #home-map.is-expanded,
 #home-map.is-expanded:has(#route-banner:not([hidden])) {
-    height: calc(100vh - 104px);
-    height: calc(100dvh - 104px);
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
 }
 
-#home-map.is-expanded .card-details,
 #home-map:has(#route-banner:not([hidden])) .card-details {
     margin-bottom: 96px;
 }
@@ -393,4 +392,9 @@ body.search-open:has(#route-banner:not([hidden])) #search-toggle {
 
 #expand-button.is-active {
     color: #0071e3;
+}
+
+body.map-expanded #logo-and-search,
+body.map-expanded #nav-bar {
+    display: none;
 }
