@@ -176,19 +176,10 @@ body.page-home #logo-and-search {
     cursor: pointer;
 }
 
-#home-map:has(#route-banner:not([hidden])) {
-    height: 80vh;
-    height: 80dvh;
-}
-
 #home-map.is-expanded,
-#home-map.is-expanded:has(#route-banner:not([hidden])) {
+#home-map:has(#route-banner:not([hidden])) {
     height: calc(100vh - 32px);
     height: calc(100dvh - 32px);
-}
-
-#home-map:has(#route-banner:not([hidden])) .card-details {
-    margin-bottom: 96px;
 }
 
 #home-map:has(#route-banner:not([hidden])) .card-details > .location-row,
@@ -340,37 +331,6 @@ body.page-home #logo-and-search {
     top: 120px;
 }
 
-#search-toggle {
-    display: none;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    color: #0d1117;
-    background: #ffffff;
-    border: 0;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-body:has(#route-banner:not([hidden])) #search-toggle {
-    display: flex;
-}
-
-body:has(#route-banner:not([hidden])) #search-bar {
-    display: none;
-}
-
-body.search-open:has(#route-banner:not([hidden])) #search-bar {
-    display: block;
-}
-
-body.search-open:has(#route-banner:not([hidden])) #search-toggle {
-    display: none;
-}
-
 #expand-button {
     position: absolute;
     top: 172px;
@@ -395,6 +355,8 @@ body.search-open:has(#route-banner:not([hidden])) #search-toggle {
 }
 
 body.map-expanded #logo-and-search,
-body.map-expanded #nav-bar {
+body.map-expanded #nav-bar,
+body:has(#route-banner:not([hidden])) #logo-and-search,
+body:has(#route-banner:not([hidden])) #nav-bar {
     display: none;
 }

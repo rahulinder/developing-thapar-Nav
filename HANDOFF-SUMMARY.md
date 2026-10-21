@@ -150,3 +150,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Expanded map hides bars
 - body.map-expanded hides #logo-and-search and #nav-bar; the map fills the viewport (index.css, home.js).
+
+## Route hides bars
+- Search-icon collapse removed. While #route-banner is visible the top bar and nav bar are hidden and the map fills the viewport (index.css), same as expanded; the card sits at the bottom.

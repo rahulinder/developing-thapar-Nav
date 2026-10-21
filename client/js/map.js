@@ -63,6 +63,18 @@ export function createCampusMap(container, { onSelect }) {
     let accuracyCircle = null;
     let selectedId = null;
     let routeLine = null;
+    let onlyIds = null;
+
+    function applyVisibility() {
+        for (const { marker, place } of markers.values()) {
+            const show = !onlyIds || onlyIds.has(place.id);
+            if (show && !map.hasLayer(marker)) {
+                marker.addTo(map);
+            } else if (!show) {
+                marker.remove();
+            }
+        }
+    }
 
     function pinIcon(place, selected) {
         const pin = el("span", { class: selected ? "map-pin is-selected" : "map-pin" });
@@ -101,6 +113,7 @@ export function createCampusMap(container, { onSelect }) {
             marker.addTo(map);
             markers.set(place.id, { marker, place });
         }
+        applyVisibility();
     }
 
     function refreshIcons() {
@@ -204,7 +217,7 @@ export function createCampusMap(container, { onSelect }) {
         });
     }
 
-    function drawRoute(coordinates, { fit = true } = {}) {
+    function drawRoute(coordinates, { fit = true, only = null, zoomTo = null } = {}) {
         clearRoute();
         const latlngs = coordinates.map((c) => [c.lat, c.lng]);
         routeLine = L.polyline(latlngs, {
@@ -214,7 +227,13 @@ export function createCampusMap(container, { onSelect }) {
             lineJoin: "round",
             interactive: false
         }).addTo(map);
-        if (fit && latlngs.length > 1) {
+        if (only) {
+            onlyIds = new Set(only);
+            applyVisibility();
+        }
+        if (zoomTo) {
+            map.setView([zoomTo.lat, zoomTo.lng], FOCUS_ZOOM);
+        } else if (fit && latlngs.length > 1) {
             map.fitBounds(routeLine.getBounds(), { padding: [40, 40], maxZoom: FOCUS_ZOOM });
         }
     }
@@ -223,6 +242,10 @@ export function createCampusMap(container, { onSelect }) {
         if (routeLine) {
             routeLine.remove();
             routeLine = null;
+        }
+        if (onlyIds) {
+            onlyIds = null;
+            applyVisibility();
         }
     }
 

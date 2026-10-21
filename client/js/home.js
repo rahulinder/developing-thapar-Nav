@@ -54,15 +54,9 @@ function main() {
         input: byId("search-input"),
         list: byId("search-suggestions"),
         onSelect: (place) => {
-            document.body.classList.remove("search-open");
             map.focusPlace(place);
             panel.open(place);
         }
-    });
-
-    byId("search-toggle").addEventListener("click", () => {
-        document.body.classList.add("search-open");
-        byId("search-input").focus();
     });
 
     const expandButton = byId("expand-button");
