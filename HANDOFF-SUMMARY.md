@@ -142,3 +142,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - #role-note moved inside #cards-section so it scrolls away with content.
 - Route banner, steps and planner now live inside .card-details in the map container (index.html, index.css). The map container grows to 80dvh while #route-banner is visible (CSS :has); Leaflet resizes via the existing ResizeObserver.
 - Client top bar uses linear-gradient(to right, #0d1117, #001636) instead of the doodle image (base.css).
+
+## Page scroll, collapsing search, expand map
+- Page now scrolls as a whole (html overflow and fixed heights removed in index.css) so the mobile browser bar can hide; top bar is sticky.
+- While a route is active the search bar collapses to a #search-toggle icon; tapping it reopens the bar (body.search-open, home.js).
+- #expand-button toggles #home-map.is-expanded (about full screen height).
