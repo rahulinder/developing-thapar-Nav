@@ -1,5 +1,6 @@
 const { Client } = require("../models");
 const { asyncHandler } = require("../utils/asyncHandler");
+const { HttpError } = require("../utils/httpError");
 
 const ping = asyncHandler(async (req, res) => {
     const { clientId, userType } = req.body;
@@ -61,4 +62,12 @@ const list = asyncHandler(async (req, res) => {
     res.json({ count: clients.length, total, page, totals: { registered, guests }, clients });
 });
 
-module.exports = { ping, list };
+const remove = asyncHandler(async (req, res) => {
+    const deleted = await Client.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+        throw new HttpError(404, "User not found.");
+    }
+    res.json({ ok: true });
+});
+
+module.exports = { ping, list, remove };

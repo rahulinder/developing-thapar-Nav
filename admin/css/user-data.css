@@ -283,3 +283,27 @@ a.inner-cards:focus-visible {
 #usertype-filter:focus-visible {
   outline: 3px solid #0071e3;
 }
+#users-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.remove-button {
+  padding: 6px 16px;
+  font-size: 15px;
+  color: #cf0000;
+  background-color: white;
+  border: 2px solid #cf0000;
+  border-radius: 100vw;
+  cursor: pointer;
+}
+.remove-button:hover:not(:disabled) {
+  color: white;
+  background-color: #cf0000;
+}
+.remove-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.remove-button:focus-visible {
+  outline: 3px solid #0071e3;
+}

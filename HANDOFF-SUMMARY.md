@@ -156,3 +156,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Welcome typewriter
 - #role-note types "Hi <name>, Welcome to Thapar" once, then fades and hides. Flag thaparNav.welcomed in localStorage (home.js, index.css) stops it from ever showing again.
+
+## Remove user
+- DELETE /api/clients/:id (admin, Mongo id) deletes the Client record; 404 if missing. User Data page has a Remove button per row with a confirm dialog and then reloads the list. Note: a removed person's device is not blocked and re-registers on its next visit.

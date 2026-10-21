@@ -36,7 +36,14 @@ function addRow(client) {
     } else {
         nameCell.textContent = client.name || "";
     }
-    row.append(nameCell, cell(client.contact || "-", "muted"), cell(TYPE_LABELS[client.userType] || client.userType), cell(formatDate(client.createdAt), "muted"));
+    const actionCell = document.createElement("td");
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.className = "remove-button";
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", () => removeUser(client, removeButton));
+    actionCell.append(removeButton);
+    row.append(nameCell, cell(client.contact || "-", "muted"), cell(TYPE_LABELS[client.userType] || client.userType), cell(formatDate(client.createdAt), "muted"), actionCell);
     body.append(row);
 }
 
@@ -46,6 +53,19 @@ function setCounts(totals) {
     document.getElementById("count-all").textContent = registered + guests;
     document.getElementById("count-registered").textContent = registered;
     document.getElementById("count-guest").textContent = guests;
+}
+
+async function removeUser(client, button) {
+    const label = client.isGuest ? "this guest" : client.name || "this user";
+    if (!window.confirm("Remove " + label + " from the platform? This cannot be undone.")) return;
+    button.disabled = true;
+    try {
+        await call("/clients/" + client._id, { method: "DELETE" });
+        await load(true);
+    } catch (error) {
+        button.disabled = false;
+        statusLine.textContent = "Could not remove user: " + error.message;
+    }
 }
 
 async function load(reset) {

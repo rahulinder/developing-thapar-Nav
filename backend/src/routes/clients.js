@@ -1,5 +1,5 @@
 const express = require("express");
-const { body, query } = require("express-validator");
+const { body, query, param } = require("express-validator");
 const { ROLES } = require("../config/constants");
 const { validate } = require("../middleware/validate");
 const { requireAdmin } = require("../middleware/auth");
@@ -23,8 +23,11 @@ function createClientsRouter({ writeLimiter }) {
         query("q").optional().isString().bail().trim().isLength({ max: 80 }).withMessage("Search text is too long")
     ];
 
+    const idRules = [param("id").isMongoId().withMessage("Invalid id")];
+
     router.post("/ping", writeLimiter, validate(pingRules), controller.ping);
     router.get("/", requireAdmin, validate(listRules), controller.list);
+    router.delete("/:id", requireAdmin, validate(idRules), controller.remove);
 
     return router;
 }
