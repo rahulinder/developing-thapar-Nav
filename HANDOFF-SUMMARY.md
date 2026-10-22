@@ -168,3 +168,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Login: Skip button
 - client/js/login-page.js: for student and teacher (staff) the guest button reads "Skip"; visitors still see "Continue as guest". Behaviour is unchanged (clears name, contact and roll number, then continues). Label checked in a real browser for all three roles.
+
+## Drivable walkways
+- Walkway model gains drivable (default false) and driveBidirectional (default true; false means one-way from -> to). POST/PUT /api/paths/walkways accept both (strict booleans).
+- Admin path editor: Draw mode panel has checkboxes (walk both ways, wheelchair friendly, drivable, drivable both ways) applied to each new walkway; Select mode panel edits them. Routing (A*) still ignores drivable - no vehicle routing yet.

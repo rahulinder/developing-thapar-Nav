@@ -33,6 +33,14 @@ const walkwaySchema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
+        drivable: {
+            type: Boolean,
+            default: false
+        },
+        driveBidirectional: {
+            type: Boolean,
+            default: true
+        },
         name: {
             type: String,
             trim: true,
