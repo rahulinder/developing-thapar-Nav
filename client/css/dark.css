@@ -237,3 +237,8 @@ html[data-theme="dark"] #home-map .map-tools.show-hints button::before {
     color: #0d1117;
     background: #e6edf3;
 }
+
+html[data-theme="dark"] #profile-avatar {
+    color: #0d1117;
+    background: #e6edf3;
+}

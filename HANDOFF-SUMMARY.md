@@ -182,3 +182,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Map buttons (client/index.html, css/index.css): route, layer, expand and locate are wrapped in #map-tools and stacked on the right (top 44px, clear of the attribution). Dark mode styles added in css/dark.css.
 - First-visit tooltips: labels beside each button for 8 seconds or until the first tap on the buttons; localStorage key thaparNav.mapHintSeen. Delete the key to see them again.
 - Checked in a real browser with a fake banner (layout, tooltips, no console errors). Not checked: real route data, Leaflet map (CDN blocked in the sandbox), dark mode visuals, real phones.
+
+## Client: "Who are you?" page and profile avatar/logout
+- user-option.html: heading is now "Who are you?"; each option has a short description under its label (.role-text in css/user-option.css).
+- profile.html, js/profile-page.js, css/profile.css: round avatar with the first letter of the name (G for guest, updates after editing the name) and a red "Log out" button (clears role and name, goes to user-option.html). Dark mode avatar in css/dark.css.
+- Checked in a real browser at 390px: both pages, avatar letter, logout redirect, no console errors. Not checked: dark mode visuals.

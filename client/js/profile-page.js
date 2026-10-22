@@ -1,5 +1,5 @@
 import { ROLES } from "./config.js";
-import { getRole, getVisitorName, setRole, setVisitorName } from "./roles.js";
+import { clearRole, clearVisitorName, getRole, getVisitorName, setRole, setVisitorName } from "./roles.js";
 import { getContact, getRollNo, isValidContact, isValidRollNo, setContact, setRollNo, syncVisit } from "./visits.js";
 
 const role = getRole();
@@ -29,6 +29,8 @@ function currentValue(field) {
 }
 
 function render() {
+    const initial = (getVisitorName() || "G").trim().charAt(0).toUpperCase() || "G";
+    document.getElementById("profile-avatar").textContent = initial;
     const hasName = Boolean(getVisitorName());
     const hasContact = Boolean(getRole() === "student" ? getRollNo() : getContact());
     for (const row of rows) {
@@ -144,3 +146,9 @@ for (const row of rows) {
 }
 
 render();
+
+document.getElementById("profile-logout").addEventListener("click", () => {
+    clearRole();
+    clearVisitorName();
+    window.location.href = "user-option.html?next=index.html";
+});
