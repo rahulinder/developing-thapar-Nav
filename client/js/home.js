@@ -62,6 +62,27 @@ function main() {
         }
     });
 
+    const HINT_KEY = "thaparNav.mapHintSeen";
+    const mapTools = byId("map-tools");
+    let hintSeen = false;
+    try {
+        hintSeen = window.localStorage.getItem(HINT_KEY) === "1";
+    } catch {
+        hintSeen = false;
+    }
+    function hideHints() {
+        mapTools.classList.remove("show-hints");
+        try {
+            window.localStorage.setItem(HINT_KEY, "1");
+        } catch {
+        }
+    }
+    if (!hintSeen) {
+        mapTools.classList.add("show-hints");
+        mapTools.addEventListener("click", hideHints, { once: true });
+        setTimeout(hideHints, 8000);
+    }
+
     const expandButton = byId("expand-button");
     expandButton.addEventListener("click", () => {
         const expanded = byId("home-map").classList.toggle("is-expanded");
@@ -172,11 +193,6 @@ function main() {
             ]),
             el(
                 "div",
-                { class: "route-buttons" },
-                buttons.map((button) => el("button", { type: "button", text: button.label, onclick: button.onClick }))
-            ),
-            el(
-                "div",
                 { class: "route-modes", role: "group", "aria-label": "Travel mode" },
                 [["walking", "Walking"], ["driving", "Driving"]].map(([mode, label]) =>
                     el("button", {
@@ -185,6 +201,18 @@ function main() {
                         "aria-pressed": String(mode === travelMode),
                         text: label,
                         onclick: () => setMode(mode)
+                    })
+                )
+            ),
+            el(
+                "div",
+                { class: "route-buttons" },
+                buttons.map((button) =>
+                    el("button", {
+                        type: "button",
+                        class: button.label === "Clear route" ? "danger" : "",
+                        text: button.label,
+                        onclick: button.onClick
                     })
                 )
             )

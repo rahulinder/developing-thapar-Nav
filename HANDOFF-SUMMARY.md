@@ -176,3 +176,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Walking / Driving routes
 - GET /api/route accepts mode=walking|driving (default walking). Driving only uses walkways with drivable=true, direction from driveBidirectional (false = one-way from -> to); junctions with no drivable walkway are not part of the driving graph, so endpoints snap to the nearest road junction within 400 m. Driving speed assumed 5.5 m/s (about 20 km/h). Response includes mode. Separate cached graph per mode (routing.js, pathfinding.js).
 - Client route card has a Walking / Driving switch (default Walking); switching re-requests the route; closing the route resets to Walking. Google Maps fallback uses the chosen mode.
+
+## Client: route card and map buttons
+- Route card (client/js/home.js showBanner, client/css/index.css): order is now title and time, Walking/Driving switch, then action buttons. "Clear route" has class danger (red, bold). Buttons share the row width.
+- Map buttons (client/index.html, css/index.css): route, layer, expand and locate are wrapped in #map-tools and stacked on the right (top 44px, clear of the attribution). Dark mode styles added in css/dark.css.
+- First-visit tooltips: labels beside each button for 8 seconds or until the first tap on the buttons; localStorage key thaparNav.mapHintSeen. Delete the key to see them again.
+- Checked in a real browser with a fake banner (layout, tooltips, no console errors). Not checked: real route data, Leaflet map (CDN blocked in the sandbox), dark mode visuals, real phones.

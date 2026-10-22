@@ -222,3 +222,18 @@ html[data-theme="dark"] .role-option {
 html[data-theme="dark"] body:has(#credentials-card) {
     background-image: url(../assets/client-interface/doodle-dark-1.svg);
 }
+
+html[data-theme="dark"] #expand-button {
+    background: #1b232d;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] #route-banner .route-buttons button.danger {
+    color: #ffffff;
+    background: #cf0000;
+}
+
+html[data-theme="dark"] #home-map .map-tools.show-hints button::before {
+    color: #0d1117;
+    background: #e6edf3;
+}
