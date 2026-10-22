@@ -136,6 +136,7 @@ function main() {
     const tracker = createOffRouteTracker();
 
     function clearRoute() {
+        travelMode = "walking";
         routeToken += 1;
         tracker.stop();
         map.clearRoute();
@@ -145,9 +146,19 @@ function main() {
         clear(routeBanner);
     }
 
+    let travelMode = "walking";
+
     function formatDuration(seconds) {
         const minutes = Math.max(1, Math.round(seconds / 60));
-        return `${minutes} min walk`;
+        return `${minutes} min ${travelMode === "driving" ? "drive" : "walk"}`;
+    }
+
+    function setMode(mode) {
+        if (mode === travelMode || !currentTo) {
+            return;
+        }
+        travelMode = mode;
+        showRoute(currentTo, currentFrom);
     }
 
     function showBanner({ title, meta, tone = "info", buttons = [] }) {
@@ -163,6 +174,19 @@ function main() {
                 "div",
                 { class: "route-buttons" },
                 buttons.map((button) => el("button", { type: "button", text: button.label, onclick: button.onClick }))
+            ),
+            el(
+                "div",
+                { class: "route-modes", role: "group", "aria-label": "Travel mode" },
+                [["walking", "Walking"], ["driving", "Driving"]].map(([mode, label]) =>
+                    el("button", {
+                        type: "button",
+                        class: mode === travelMode ? "mode-button is-active" : "mode-button",
+                        "aria-pressed": String(mode === travelMode),
+                        text: label,
+                        onclick: () => setMode(mode)
+                    })
+                )
             )
         );
     }
@@ -232,7 +256,7 @@ function main() {
             return;
         }
 
-        const params = { toPlace: place.id, role };
+        const params = { toPlace: place.id, role, mode: travelMode };
         let startNote;
         let usingGps = false;
         if (fromPlace) {
@@ -260,7 +284,7 @@ function main() {
 
         showBanner({
             title,
-            meta: auto ? "You left the path. Finding a new route..." : "Finding the best walking path...",
+            meta: auto ? "You left the path. Finding a new route..." : travelMode === "driving" ? "Finding the best driving route..." : "Finding the best walking path...",
             buttons: [{ label: "Cancel", onClick: clearRoute }]
         });
 
@@ -294,7 +318,7 @@ function main() {
                 tone: "error",
                 buttons: [
                     changeButton,
-                    { label: "Open in Google Maps", onClick: () => openInGoogleMaps(place) },
+                    { label: "Open in Google Maps", onClick: () => openInGoogleMaps(place, travelMode) },
                     { label: "Close", onClick: clearRoute }
                 ]
             });

@@ -385,3 +385,24 @@ body:has(#route-banner:not([hidden])) #nav-bar {
         opacity: 0;
     }
 }
+
+#route-banner .route-modes {
+    display: flex;
+    flex-basis: 100%;
+    gap: 4px;
+    padding: 4px;
+    background: #ffffff;
+    border-radius: 999px;
+}
+
+#route-banner .route-modes .mode-button {
+    flex: 1;
+    padding: 8px 14px;
+    color: #0d1117;
+    background: transparent;
+}
+
+#route-banner .route-modes .mode-button.is-active {
+    color: #ffffff;
+    background: #0d1117;
+}

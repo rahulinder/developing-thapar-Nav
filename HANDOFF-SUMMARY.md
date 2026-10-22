@@ -172,3 +172,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Drivable walkways
 - Walkway model gains drivable (default false) and driveBidirectional (default true; false means one-way from -> to). POST/PUT /api/paths/walkways accept both (strict booleans).
 - Admin path editor: Draw mode panel has checkboxes (walk both ways, wheelchair friendly, drivable, drivable both ways) applied to each new walkway; Select mode panel edits them. Routing (A*) still ignores drivable - no vehicle routing yet.
+
+## Walking / Driving routes
+- GET /api/route accepts mode=walking|driving (default walking). Driving only uses walkways with drivable=true, direction from driveBidirectional (false = one-way from -> to); junctions with no drivable walkway are not part of the driving graph, so endpoints snap to the nearest road junction within 400 m. Driving speed assumed 5.5 m/s (about 20 km/h). Response includes mode. Separate cached graph per mode (routing.js, pathfinding.js).
+- Client route card has a Walking / Driving switch (default Walking); switching re-requests the route; closing the route resets to Walking. Google Maps fallback uses the chosen mode.
