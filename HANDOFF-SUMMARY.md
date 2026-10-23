@@ -203,3 +203,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Wheelchair removed
 - All wheelchair/accessible handling is gone: Walkway.wheelchairAccessible, the accessible route option and response field, the path editor checkbox and purple line colour, tests and docs. Old walkway documents may still carry a wheelchairAccessible field in MongoDB; it is ignored and harmless.
+
+## Edit history (admin)
+- Backend: models/EditLog.js, services/audit.js (record, snapshot, diff), controllers/auditController.js, routes/audit.js, mounted at GET /api/audit (admin; filters entity, action, q, page, limit<=100). placesController (create, update, delete, photo set/remove, CSV bulk import) and pathsController (junction and walkway create, update, delete) write one entry each; updates store field-by-field from/to and skip entries when nothing changed. Entries keep the admin name and item name as text, so they survive renames and deletes. A failed log write never blocks the edit.
+- Admin: Settings now has an "Edit History" card -> admin/edit-history.html (+ css/edit-history.css, js/edit-history-page.js, listEditHistory in js/api.js). Tabs All/Places/Walkways/Junctions, action filter, search by name or admin, Load more.
+- Not logged: user (client) removals, admin profile edits, and edits made directly in MongoDB. Entries are never edited or deleted by the app.
+- Tested with the real Express app and an in-memory stand-in for the database (create/update/delete of place, junction, walkway; filters, search, paging, access control: 21 checks) and the real admin page in a browser. Not run against Atlas. tests/api.test.js was not extended (needs a real test database).

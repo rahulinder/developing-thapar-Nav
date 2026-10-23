@@ -72,3 +72,7 @@ Latitude and longitude values are accepted only inside a box around the campus, 
 ## Every record also has
 
 `_id` (unique id made by MongoDB), `createdAt` and `updatedAt` (filled in automatically).
+
+## EditLog (edit history)
+
+One document per add, change or delete of a place, junction or walkway: `admin` (who, as an Admin id), `adminName` (their name at that moment, so old entries stay readable if the name changes), `action` (created, updated, deleted), `entity` (place, junction, walkway), `entityId`, `entityName` (name or label at that moment, so deleted items can still be identified), `summary`, `changes` (`field`, `from`, `to`) and `createdAt`. If saving a log entry fails, the edit itself still goes through and the error is printed to the server log.

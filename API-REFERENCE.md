@@ -116,3 +116,9 @@ Body: `{ "mode": "skip" | "update", "places": [ { name, category, lat, lng, ... 
 - `GET /api/places/:id/photo` returns the image. Public for active places, admin only for hidden ones. 404 when the place has no photo.
 - `PUT /api/places/:id/photo` (admin) with the image as the raw request body and `Content-Type` image/jpeg, image/png or image/webp. Maximum 450 KB. Returns `{ place }` with `hasPhoto: true` and a new `photoVersion`.
 - `DELETE /api/places/:id/photo` (admin) removes it.
+
+## Edit history
+
+- `GET /api/audit` (admin) lists who added, changed or deleted a place, junction or walkway, newest first. Query: `entity` (place, junction, walkway), `action` (created, updated, deleted), `q` (searches the item name and the admin name), `page`, `limit` (1 to 100, default 25).
+- Returns `{ count, total, page, entries }`. Each entry has `adminName`, `action`, `entity`, `entityId`, `entityName`, `summary`, `changes` (a list of `{ field, from, to }` for changes) and `createdAt`.
+- Entries are written automatically by the places and paths endpoints (including photo changes and CSV import). There is no endpoint to edit or delete entries.

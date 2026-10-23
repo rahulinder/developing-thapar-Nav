@@ -2,6 +2,7 @@ const { Place, Junction } = require("../models");
 const { HttpError } = require("../utils/httpError");
 const { asyncHandler } = require("../utils/asyncHandler");
 const { searchTokens } = require("../utils/text");
+const { record, snapshot, diff } = require("../services/audit");
 
 const EDITABLE_FIELDS = [
     "name",
@@ -83,6 +84,7 @@ const createPlace = asyncHandler(async (req, res) => {
     const data = pickEditable(req.body);
     await assertJunctionExists(data.junction);
     const place = await Place.create(data);
+    await record(req, { action: "created", entity: "place", entityId: place._id, entityName: place.name, summary: "Added a " + place.category + " place" });
     res.status(201).json({ place });
 });
 
@@ -93,8 +95,13 @@ const updatePlace = asyncHandler(async (req, res) => {
     }
     const data = pickEditable(req.body);
     await assertJunctionExists(data.junction);
+    const before = snapshot(place, EDITABLE_FIELDS);
     place.set(data);
     await place.save();
+    const changes = diff(before, snapshot(place, EDITABLE_FIELDS), EDITABLE_FIELDS);
+    if (changes.length) {
+        await record(req, { action: "updated", entity: "place", entityId: place._id, entityName: place.name, summary: "Changed " + changes.map((item) => item.field).join(", "), changes });
+    }
     res.json({ place });
 });
 
@@ -104,6 +111,7 @@ const deletePlace = asyncHandler(async (req, res) => {
         throw new HttpError(404, "Place not found.");
     }
     await place.deleteOne();
+    await record(req, { action: "deleted", entity: "place", entityId: place._id, entityName: place.name, summary: "Deleted a " + place.category + " place" });
     res.json({ message: "Place deleted.", id: req.params.id });
 });
 
@@ -143,6 +151,7 @@ const setPhoto = asyncHandler(async (req, res) => {
     place.hasPhoto = true;
     place.photoVersion = (place.photoVersion || 0) + 1;
     await place.save();
+    await record(req, { action: "updated", entity: "place", entityId: place._id, entityName: place.name, summary: "Changed photo", changes: [{ field: "photo", from: "", to: "new photo" }] });
     res.json({ place });
 });
 
@@ -155,6 +164,7 @@ const removePhoto = asyncHandler(async (req, res) => {
     place.hasPhoto = false;
     place.photoVersion = (place.photoVersion || 0) + 1;
     await place.save();
+    await record(req, { action: "updated", entity: "place", entityId: place._id, entityName: place.name, summary: "Removed photo", changes: [{ field: "photo", from: "photo", to: "" }] });
     res.json({ place });
 });
 
@@ -193,12 +203,18 @@ const bulkImport = asyncHandler(async (req, res) => {
                 counts.skipped += 1;
                 results.push({ index, status: "skipped" });
             } else if (existing) {
+                const before = snapshot(existing, EDITABLE_FIELDS);
                 existing.set(data);
                 await existing.save();
+                const changes = diff(before, snapshot(existing, EDITABLE_FIELDS), EDITABLE_FIELDS);
+                if (changes.length) {
+                    await record(req, { action: "updated", entity: "place", entityId: existing._id, entityName: existing.name, summary: "Changed " + changes.map((item) => item.field).join(", ") + " (CSV import)", changes });
+                }
                 counts.updated += 1;
                 results.push({ index, status: "updated", id: String(existing._id) });
             } else {
                 const place = await Place.create(data);
+                await record(req, { action: "created", entity: "place", entityId: place._id, entityName: place.name, summary: "Added from CSV import" });
                 counts.created += 1;
                 results.push({ index, status: "created", id: String(place._id) });
             }

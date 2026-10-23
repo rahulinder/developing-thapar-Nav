@@ -136,3 +136,11 @@ export function deletePlacePhoto(id) {
 export function placePhotoUrl(place) {
     return API_BASE_URL + API_PREFIX + "/places/" + encodeURIComponent(place._id) + "/photo?v=" + (place.photoVersion || 0);
 }
+
+export function listEditHistory({ entity, action, q, page, limit }) {
+    const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+    if (entity) params.set("entity", entity);
+    if (action) params.set("action", action);
+    if (q) params.set("q", q);
+    return call("/audit?" + params.toString());
+}
