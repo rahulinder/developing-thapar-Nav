@@ -50,7 +50,27 @@ function main() {
         }
     });
 
-    const map = createCampusMap(byId("map"), { onSelect: (place) => panel.open(place) });
+    const map = createCampusMap(byId("map"), { onSelect: (place) => panel.open(place), onRoute: (place) => startRoute(place) });
+
+    const mapMessage = byId("map-message");
+
+    function showMapMessage(text, { retry = false } = {}) {
+        clear(mapMessage);
+        mapMessage.append(el("span", { text }));
+        if (retry) {
+            mapMessage.append(el("button", { type: "button", text: "Try again", onclick: () => window.location.reload() }));
+        }
+        mapMessage.hidden = false;
+    }
+
+    function hideMapMessage() {
+        mapMessage.hidden = true;
+        clear(mapMessage);
+    }
+
+    if (!map.available) {
+        showMapMessage("The map could not load. Check your internet connection.", { retry: true });
+    }
 
     const searchBox = createSearchBox({
         form: byId("search-bar"),
@@ -182,13 +202,19 @@ function main() {
         showRoute(currentTo, currentFrom);
     }
 
-    function showBanner({ title, meta, tone = "info", buttons = [] }) {
+    function showBanner({ title, meta, tone = "info", loading = false, buttons = [] }) {
         clear(routeBanner);
         routeBanner.dataset.tone = tone;
         routeBanner.hidden = false;
         routeBanner.append(
             el("div", { class: "route-info" }, [
-                el("span", { class: "route-title", text: title }),
+                el("div", { class: "route-heading" }, [
+                    loading ? el("span", { class: "route-spinner", "aria-hidden": "true" }) : null,
+                    el("span", { class: "route-title", text: title })
+                ]),
+                loading
+                    ? el("div", { class: "route-skeleton", "aria-hidden": "true" }, [el("span"), el("span")])
+                    : null,
                 meta ? el("span", { class: "route-meta", text: meta }) : null
             ]),
             el(
@@ -312,6 +338,7 @@ function main() {
 
         showBanner({
             title,
+            loading: true,
             meta: auto ? "You left the path. Finding a new route..." : travelMode === "driving" ? "Finding the best driving route..." : "Finding the best walking path...",
             buttons: [{ label: "Cancel", onClick: clearRoute }]
         });
@@ -321,7 +348,11 @@ function main() {
             if (token !== routeToken) {
                 return;
             }
-            map.drawRoute(route.coordinates, { fit: !auto });
+            map.drawRoute(route.coordinates, {
+                fit: false,
+                only: [place.id, params.fromPlace].filter(Boolean),
+                zoomTo: auto ? null : route.coordinates[0]
+            });
             if (usingGps) {
                 tracker.start(route.coordinates, place);
             }
@@ -424,6 +455,9 @@ function main() {
     function renderPlaces(list) {
         places = list;
         clear(sections);
+        if (map.available) {
+            hideMapMessage();
+        }
         map.setPlaces(places);
         searchBox.setPlaces(places);
         fromBox.setPlaces(places);
@@ -431,6 +465,9 @@ function main() {
         updateLocationLabel();
 
         if (places.length === 0) {
+            if (map.available) {
+                showMapMessage("No places to show yet.");
+            }
             sections.append(
                 createStateCard({
                     title: "No places yet",

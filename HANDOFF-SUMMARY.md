@@ -191,3 +191,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Admin: dashboard counts and path editor markings
 - Dashboard cards show a count under the title (hostels, shops, places, buildings, visitors) via admin/js/dashboard-page.js; counts come from GET /places?category=...&includeInactive=true&limit=1 (total) and GET /clients?userType=visitor&limit=1; hidden if a request fails.
 - Path editor (path-page.js, path-editor.css): drivable walkways get a green translucent underlay; one-way walking shows a blue/purple arrow, one-way driving a green arrow, both pointing toward the "to" junction. Decorations rebuild only when a walkway's data or endpoints change, and are removed with the walkway.
+
+## Client: loading and empty states, pin popups
+- Route card: while a route is being found the title has a spinner and two shimmering placeholder chips (showBanner loading option, css/index.css).
+- #map-message overlay in the map: "map could not load" with Try again, and "No places to show yet".
+- Tapping a pin opens a popup with name, category, Details (full panel) and Directions (starts a route); createCampusMap takes onRoute.
+- home.js now also passes only/zoomTo to map.drawRoute, so a route zooms to its start and hides the other pins (earlier patch had reached map.js only).
