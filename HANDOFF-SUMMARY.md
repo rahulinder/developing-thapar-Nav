@@ -194,3 +194,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Compact map credit
 - The Esri/OpenStreetMap credit is collapsed into a small "i" button on the client map (map.js, css/index.css); tapping it shows the credit for 5 seconds. It is not removed, because the imagery and map data terms require a visible credit.
+
+## Who are you? descriptions removed
+- The short <small> description under each option in client/user-option.html is gone; the heading and .role-text layout stay.
