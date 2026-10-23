@@ -197,3 +197,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Who are you? descriptions removed
 - The short <small> description under each option in client/user-option.html is gone; the heading and .role-text layout stay.
+
+## Login background
+- The doodle background image is removed from the client login page (client/css/login.css); the page uses the plain #f0f6fc background.
