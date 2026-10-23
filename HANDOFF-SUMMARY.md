@@ -217,3 +217,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - admin/path-editor.html: a second card (#history-card, data-limit="10") sits below the map card with the same Edit History list (tabs All/Places/Walkways/Junctions, action filter, search, Load more, 10 rows at a time). It reuses js/edit-history-page.js and the same element ids; styles are scoped under #history-card in css/path-editor.css. The Settings > Edit History page is unchanged and still works.
 - admin/js/api.js: after any successful POST/PUT/DELETE to /places or /paths the page dispatches a "data-edited" event; edit-history-page.js listens and reloads the list 0.8 s later, so new edits appear straight away.
 - Checked in a real browser with a stand-in API: card below the map, rows, tabs, and auto-refresh after creating a junction. The map itself was not visible in the test (Leaflet CDN blocked in the sandbox).
+
+## Edit history column names
+- Table headers are now Date, Admin's Name, Action, Alteration, Details (were When, Who, Action, What, Details) in admin/edit-history.html and in the history card in admin/path-editor.html. Text change only; checked by reading both files, not re-run in a browser.
