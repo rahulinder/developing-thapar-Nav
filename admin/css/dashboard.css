@@ -116,3 +116,27 @@ body{
     transition: none;
   }
 }
+
+.quick-card-count {
+  position: absolute;
+  left: 35px;
+  bottom: 14px;
+  width: 186px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+.quick-card-count[hidden] {
+  display: none;
+}
+.quick-card:hover .quick-card-count,
+.quick-card:focus-visible .quick-card-count {
+  transform: translateX(35px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .quick-card-count {
+    transition: none;
+  }
+}

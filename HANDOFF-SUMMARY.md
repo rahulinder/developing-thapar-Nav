@@ -187,3 +187,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - user-option.html: heading is now "Who are you?"; each option has a short description under its label (.role-text in css/user-option.css).
 - profile.html, js/profile-page.js, css/profile.css: round avatar with the first letter of the name (G for guest, updates after editing the name) and a red "Log out" button (clears role and name, goes to user-option.html). Dark mode avatar in css/dark.css.
 - Checked in a real browser at 390px: both pages, avatar letter, logout redirect, no console errors. Not checked: dark mode visuals.
+
+## Admin: dashboard counts and path editor markings
+- Dashboard cards show a count under the title (hostels, shops, places, buildings, visitors) via admin/js/dashboard-page.js; counts come from GET /places?category=...&includeInactive=true&limit=1 (total) and GET /clients?userType=visitor&limit=1; hidden if a request fails.
+- Path editor (path-page.js, path-editor.css): drivable walkways get a green translucent underlay; one-way walking shows a blue/purple arrow, one-way driving a green arrow, both pointing toward the "to" junction. Decorations rebuild only when a walkway's data or endpoints change, and are removed with the walkway.
