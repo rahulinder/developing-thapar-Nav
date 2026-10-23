@@ -20,7 +20,7 @@ function stubMap() {
     };
 }
 
-export function createCampusMap(container, { onSelect, onRoute = null }) {
+export function createCampusMap(container, { onSelect }) {
     const L = window.L;
     if (!L) {
         return stubMap();
@@ -34,6 +34,16 @@ export function createCampusMap(container, { onSelect, onRoute = null }) {
 
     map.attributionControl.setPosition("topright");
     map.attributionControl.setPrefix(false);
+    const credit = map.attributionControl.getContainer();
+    credit.classList.add("compact");
+    let creditTimer = null;
+    credit.addEventListener("click", () => {
+        const open = credit.classList.toggle("is-open");
+        window.clearTimeout(creditTimer);
+        if (open) {
+            creditTimer = window.setTimeout(() => credit.classList.remove("is-open"), 5000);
+        }
+    });
 
     const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -76,24 +86,6 @@ export function createCampusMap(container, { onSelect, onRoute = null }) {
         }
     }
 
-    function buildPopup(place) {
-        const dot = el("span", { class: "pin-popup-dot" });
-        dot.style.setProperty("--pin", categoryColor(place.category));
-        const actions = [
-            el("button", { type: "button", class: "pin-popup-button", text: "Details", onclick: () => { map.closePopup(); onSelect(place); } })
-        ];
-        if (typeof onRoute === "function") {
-            actions.push(
-                el("button", { type: "button", class: "pin-popup-button primary", text: "Directions", onclick: () => { map.closePopup(); onRoute(place); } })
-            );
-        }
-        return el("div", { class: "pin-popup-body" }, [
-            el("strong", { class: "pin-popup-title", text: place.name }),
-            el("span", { class: "pin-popup-category" }, [dot, categoryLabel(place.category)]),
-            el("div", { class: "pin-popup-actions" }, actions)
-        ]);
-    }
-
     function pinIcon(place, selected) {
         const pin = el("span", { class: selected ? "map-pin is-selected" : "map-pin" });
         pin.style.setProperty("--pin", categoryColor(place.category));
@@ -127,8 +119,7 @@ export function createCampusMap(container, { onSelect, onRoute = null }) {
                 ]),
                 { direction: "top", offset: [0, -12] }
             );
-            marker.bindPopup(() => buildPopup(place), { className: "pin-popup", closeButton: false, offset: [0, -6], autoPanPadding: [24, 24] });
-            marker.on("popupopen", () => marker.closeTooltip());
+            marker.on("click", () => onSelect(place));
             marker.addTo(map);
             markers.set(place.id, { marker, place });
         }
