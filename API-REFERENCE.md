@@ -65,8 +65,8 @@ Place fields: `name`, `category`, `description`, `aliases`, `lat`, `lng`, `visib
 | `PUT /api/paths/junctions/:id` | admin | `{ lat, lng, label }`, also recalculates connected walkway lengths |
 | `DELETE /api/paths/junctions/:id` | admin | Also deletes its walkways and unlinks places |
 | `GET /api/paths/walkways` | everyone | Walkway list |
-| `POST /api/paths/walkways` | admin | `{ from, to, name, bidirectional, wheelchairAccessible }`, length is calculated by the server |
-| `PUT /api/paths/walkways/:id` | admin | Change `name`, `bidirectional`, `wheelchairAccessible` |
+| `POST /api/paths/walkways` | admin | `{ from, to, name, bidirectional, drivable, driveBidirectional }`, length is calculated by the server |
+| `PUT /api/paths/walkways/:id` | admin | Change `name`, `bidirectional`, `drivable`, `driveBidirectional` |
 | `DELETE /api/paths/walkways/:id` | admin | Delete a walkway |
 
 ## Route finding (B4)
@@ -75,7 +75,7 @@ Place fields: `name`, `category`, `description`, `aliases`, `lat`, `lng`, `visib
 
 Start: `fromPlace=<place id>` or `fromLat=..&fromLng=..`
 Destination: `toPlace=<place id>` or `toLat=..&toLng=..`
-Optional: `role=student` (destination and start places must be visible to the role), `accessible=true` (avoid walkways marked not wheelchair accessible).
+Optional: `role=student` (destination and start places must be visible to the role), `mode=walking|driving` (default walking; driving uses only drivable walkways).
 
 Returns:
 
@@ -83,7 +83,7 @@ Returns:
 { "route": {
     "distanceMeters": 412.3,
     "durationSeconds": 317,
-    "accessible": false,
+    "mode": "walking",
     "from": { "type": "place", "name": "...", "lat": 0, "lng": 0 },
     "to":   { "type": "point", "lat": 0, "lng": 0 },
     "coordinates": [ { "lat": 30.3547, "lng": 76.3621 }, ... ]

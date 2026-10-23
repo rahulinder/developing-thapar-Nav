@@ -29,10 +29,6 @@ const walkwaySchema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
-        wheelchairAccessible: {
-            type: Boolean,
-            default: true
-        },
         drivable: {
             type: Boolean,
             default: false

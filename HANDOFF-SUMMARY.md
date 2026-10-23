@@ -26,7 +26,7 @@ Stack (fixed; MongoDB and Render must stay): plain HTML/CSS/JS (ES modules) clie
 - backend/src/config/db.js has a DNS fallback (Google/Cloudflare) for Atlas SRV lookup failures. It works on my PC.
 - API: POST /api/clients/ping {clientId,userType,name?,contact?} (public, write limiter); GET /api/clients?type=all|registered|guest&userType&q&page&limit<=100 (admin) -> {count,total,page,totals:{registered,guests},clients}; POST /api/auth/login {username,password} -> {token,expiresIn,admin}; GET /api/auth/me; PUT /api/auth/me {displayName,email,phone,avatar} (admin); PUT /api/auth/password {currentPassword,newPassword} (admin, wrong current password returns 400); GET/POST /api/places; GET/PUT/DELETE /api/places/:id (list params role, category, q, limit<=500, page, includeInactive=true with admin token; returns {count,total,page,places}); GET /api/paths/network, /junctions, /walkways (public); POST /api/places/bulk {mode:skip|update, places:[<=30]} (admin); POST/PUT/DELETE /api/paths/junctions[/:id] and /api/paths/walkways[/:id] (admin); GET /api/route (A*); GET /api/health. Errors: {error, details:[{field,message}]}; duplicates 409.
 - Place fields: name (2-120, unique ignoring case), category (academic, hostel, food, admin, library, sports, medical, gate, parking, other), description, aliases (max 10), lat 30.3-30.4, lng 76.3-76.45, visibleTo (student/staff/visitor), openingHours, isEntrance, junction (id or null), isActive.
-- Junction: label, lat, lng. Walkway: from, to, distanceMeters (server computed), bidirectional, wheelchairAccessible, name. Deleting a junction removes its walkways and unlinks its places. Editing walkways or junctions refreshes the routing graph.
+- Junction: label, lat, lng. Walkway: from, to, distanceMeters (server computed), bidirectional, drivable, driveBidirectional, name. Deleting a junction removes its walkways and unlinks its places. Editing walkways or junctions refreshes the routing graph.
 - Known minor issue: list results from .lean() also contain nameKey and __v (not fixed).
 
 ## Status
@@ -171,7 +171,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Drivable walkways
 - Walkway model gains drivable (default false) and driveBidirectional (default true; false means one-way from -> to). POST/PUT /api/paths/walkways accept both (strict booleans).
-- Admin path editor: Draw mode panel has checkboxes (walk both ways, wheelchair friendly, drivable, drivable both ways) applied to each new walkway; Select mode panel edits them. Routing (A*) still ignores drivable - no vehicle routing yet.
+- Admin path editor: Draw mode panel has checkboxes (walk both ways, drivable, drivable both ways) applied to each new walkway; Select mode panel edits them. Routing (A*) still ignores drivable - no vehicle routing yet.
 
 ## Walking / Driving routes
 - GET /api/route accepts mode=walking|driving (default walking). Driving only uses walkways with drivable=true, direction from driveBidirectional (false = one-way from -> to); junctions with no drivable walkway are not part of the driving graph, so endpoints snap to the nearest road junction within 400 m. Driving speed assumed 5.5 m/s (about 20 km/h). Response includes mode. Separate cached graph per mode (routing.js, pathfinding.js).
@@ -201,6 +201,5 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Login background
 - The doodle background image is removed from the client login page (client/css/login.css); the page uses the plain #f0f6fc background.
 
-## Saved and recent places, inline login errors
-- client/js/saved.js: favourites (max 10, localStorage thaparNav.favourites) and recent searches (max 5, thaparNav.recent); both fire a saved-changed event. Place panel has a Save/Saved toggle; picking a search suggestion adds to recent. Home shows #my-places chip rows (Saved places, Recent searches with Clear) under the map; they hide when empty and survive logout.
-- Login form is novalidate; errors show under each field (name required, roll number or contact format) with aria-invalid and role=alert, instead of the browser pop-up.
+## Wheelchair removed
+- All wheelchair/accessible handling is gone: Walkway.wheelchairAccessible, the accessible route option and response field, the path editor checkbox and purple line colour, tests and docs. Old walkway documents may still carry a wheelchairAccessible field in MongoDB; it is ignored and harmless.

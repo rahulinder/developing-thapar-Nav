@@ -67,7 +67,7 @@ const listWalkways = asyncHandler(async (req, res) => {
 });
 
 const createWalkway = asyncHandler(async (req, res) => {
-    const { from, to, name, bidirectional, wheelchairAccessible, drivable, driveBidirectional } = req.body;
+    const { from, to, name, bidirectional, drivable, driveBidirectional } = req.body;
     if (String(from) === String(to)) {
         throw new HttpError(400, "A walkway cannot start and end at the same junction.");
     }
@@ -89,7 +89,6 @@ const createWalkway = asyncHandler(async (req, res) => {
         to,
         name,
         bidirectional,
-        wheelchairAccessible,
         drivable,
         driveBidirectional,
         distanceMeters: distanceBetween(start, end)
@@ -103,8 +102,8 @@ const updateWalkway = asyncHandler(async (req, res) => {
     if (!walkway) {
         throw new HttpError(404, "Walkway not found.");
     }
-    const { name, bidirectional, wheelchairAccessible, drivable, driveBidirectional } = req.body;
-    walkway.set(definedOnly({ name, bidirectional, wheelchairAccessible, drivable, driveBidirectional }));
+    const { name, bidirectional, drivable, driveBidirectional } = req.body;
+    walkway.set(definedOnly({ name, bidirectional, drivable, driveBidirectional }));
     await walkway.save();
     invalidateGraph();
     res.json({ walkway });

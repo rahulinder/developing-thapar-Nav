@@ -20,7 +20,7 @@ const state = {
     selected: null,
     connectFrom: null,
     busy: false,
-    defaults: { bidirectional: true, wheelchairAccessible: true, drivable: false, driveBidirectional: true }
+    defaults: { bidirectional: true, drivable: false, driveBidirectional: true }
 };
 
 let map = null;
@@ -98,7 +98,7 @@ function placeIcon(classes) {
 
 function walkStyle(data, selected) {
     return {
-        color: selected ? "#ff9500" : data.wheelchairAccessible === false ? "#7c3aed" : "#0071e3",
+        color: selected ? "#ff9500" : "#0071e3",
         weight: selected ? 7 : 5,
         opacity: 0.85,
         dashArray: data.bidirectional === false ? "8 8" : null,
@@ -122,7 +122,7 @@ function pointAt(a, b, t) {
 }
 
 function decorSignature(data, a, b) {
-    return [data.drivable === true, data.driveBidirectional !== false, data.bidirectional !== false, data.wheelchairAccessible !== false, a.lat, a.lng, b.lat, b.lng].join("|");
+    return [data.drivable === true, data.driveBidirectional !== false, data.bidirectional !== false, a.lat, a.lng, b.lat, b.lng].join("|");
 }
 
 function removeDecor(entry) {
@@ -147,7 +147,7 @@ function rebuildDecor(entry) {
     if (data.drivable === true) {
         entry.casing = L.polyline(latlngs, { color: "#16a34a", weight: 13, opacity: 0.4, lineCap: "round", interactive: false }).addTo(casingLayer);
     }
-    const walkColor = data.wheelchairAccessible === false ? "#7c3aed" : "#0071e3";
+    const walkColor = "#0071e3";
     if (data.bidirectional === false) {
         entry.arrows.push(L.marker(pointAt(a.data, b.data, 0.38), { icon: arrowIcon("walk", walkColor, angle), interactive: false, keyboard: false }).addTo(arrowLayer));
     }
@@ -377,7 +377,7 @@ function renderOverview() {
     if (state.junctions.size > 0 && parts === 1 && isolated.length === 0 && unlinked.length === 0 && state.places.size > 0) {
         nodes.push(el("p", { class: "good", text: "Everything is connected. Routing should work." }));
     }
-    nodes.push(el("p", { class: "muted", text: "Blue line: two-way walkway. Dashed: one-way. Purple: not wheelchair friendly. Green glow: drivable. Arrows show one-way direction (blue or purple: walking, green: driving). Purple squares: places linked to a junction." }));
+    nodes.push(el("p", { class: "muted", text: "Blue line: two-way walkway. Dashed: one-way. Green glow: drivable. Arrows show one-way direction (blue: walking, green: driving). Purple squares: places linked to a junction." }));
     return nodes;
 }
 
@@ -457,7 +457,6 @@ function connectOptions() {
     const d = state.defaults;
     const rows = [
         el("label", { class: "check" }, [checkbox(d.bidirectional, (v) => { d.bidirectional = v; }), "Can be walked both ways"]),
-        el("label", { class: "check" }, [checkbox(d.wheelchairAccessible, (v) => { d.wheelchairAccessible = v; }), "Wheelchair friendly"]),
         el("label", { class: "check" }, [checkbox(d.drivable, (v) => { d.drivable = v; renderPanel(); }), "Drivable"])
     ];
     if (d.drivable) {
@@ -473,8 +472,6 @@ function renderWalkwayPanel(id) {
     name.value = data.name || "";
     const two = el("input", { type: "checkbox" });
     two.checked = data.bidirectional !== false;
-    const chair = el("input", { type: "checkbox" });
-    chair.checked = data.wheelchairAccessible !== false;
     const drive = el("input", { type: "checkbox" });
     drive.checked = data.drivable === true;
     const driveTwo = el("input", { type: "checkbox" });
@@ -487,7 +484,7 @@ function renderWalkwayPanel(id) {
         clear(errors);
         save.disabled = true;
         try {
-            const response = await updateWalkway(id, { name: name.value.trim(), bidirectional: two.checked, wheelchairAccessible: chair.checked, drivable: drive.checked, driveBidirectional: driveTwo.checked });
+            const response = await updateWalkway(id, { name: name.value.trim(), bidirectional: two.checked, drivable: drive.checked, driveBidirectional: driveTwo.checked });
             entry.data = { ...entry.data, ...response.walkway };
             toast("Walkway saved.");
             refreshStyles();
@@ -518,7 +515,6 @@ function renderWalkwayPanel(id) {
         el("p", { class: "muted", text: junctionLabel(data.from) + " to " + junctionLabel(data.to) + " · " + Math.round(data.distanceMeters) + " m" }),
         field("Name (optional)", name),
         el("label", { class: "check" }, [two, "Can be walked both ways"]),
-        el("label", { class: "check" }, [chair, "Wheelchair friendly"]),
         el("label", { class: "check" }, [drive, "Drivable"]),
         driveTwoRow,
         errors,

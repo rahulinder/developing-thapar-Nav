@@ -45,14 +45,6 @@ test("returns null when no path exists and handles same start and goal", () => {
     assert.equal(findShortestPath(graph, "a", "missing"), null);
 });
 
-test("accessible-only graphs skip inaccessible walkways", () => {
-    const walkways = [W("a", "b", 100, { wheelchairAccessible: false }), W("a", "c", 100), W("c", "b", 100)];
-    const normal = findShortestPath(buildGraph(junctions, walkways), "a", "b");
-    assert.deepEqual(normal.nodeIds, ["a", "b"]);
-    const accessible = findShortestPath(buildGraph(junctions, walkways, { accessibleOnly: true }), "a", "b");
-    assert.deepEqual(accessible.nodeIds, ["a", "c", "b"]);
-});
-
 test("nearestNode picks the closest junction", () => {
     const graph = buildGraph(junctions, []);
     const hit = nearestNode(graph, { lat: 30.3556, lng: 76.3622 });

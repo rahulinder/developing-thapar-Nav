@@ -47,7 +47,8 @@ Indexes: category, role visibility, and a hidden lowercase copy of the name (`na
 | from, to | links to Junctions | both required and different from each other |
 | distanceMeters | number | required, above zero; the server will calculate it later from the two junctions |
 | bidirectional | true or false | defaults to true, meaning it can be walked both ways |
-| wheelchairAccessible | true or false | defaults to true |
+| drivable | true or false | defaults to false |
+| driveBidirectional | true or false | defaults to true; false means one-way from `from` to `to` for driving |
 | name | text | optional |
 
 The same pair of junctions can only be joined once (`from` plus `to` is unique).

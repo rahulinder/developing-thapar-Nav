@@ -49,7 +49,7 @@ class MinHeap {
     }
 }
 
-function buildGraph(junctions, walkways, { accessibleOnly = false, mode = "walking" } = {}) {
+function buildGraph(junctions, walkways, { mode = "walking" } = {}) {
     const driving = mode === "driving";
     const used = new Set();
     const nodes = new Map();
@@ -63,7 +63,7 @@ function buildGraph(junctions, walkways, { accessibleOnly = false, mode = "walki
     }
 
     for (const walkway of walkways) {
-        if (driving ? walkway.drivable !== true : accessibleOnly && walkway.wheelchairAccessible === false) {
+        if (driving && walkway.drivable !== true) {
             continue;
         }
         const from = nodes.get(String(walkway.from));

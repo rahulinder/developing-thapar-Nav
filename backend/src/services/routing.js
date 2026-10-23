@@ -6,20 +6,20 @@ const WALKING_SPEED_METERS_PER_SECOND = 1.3;
 const DRIVING_SPEED_METERS_PER_SECOND = 5.5;
 const MAX_SNAP_METERS = 400;
 
-let cache = { normal: null, accessible: null, driving: null };
+let cache = { walking: null, driving: null };
 
 function invalidateGraph() {
-    cache = { normal: null, accessible: null, driving: null };
+    cache = { walking: null, driving: null };
 }
 
-async function getGraph(accessibleOnly, mode) {
-    const key = mode === "driving" ? "driving" : accessibleOnly ? "accessible" : "normal";
+async function getGraph(mode) {
+    const key = mode === "driving" ? "driving" : "walking";
     if (!cache[key]) {
         const [junctions, walkways] = await Promise.all([
             Junction.find().lean(),
             Walkway.find().lean()
         ]);
-        cache[key] = buildGraph(junctions, walkways, { accessibleOnly, mode });
+        cache[key] = buildGraph(junctions, walkways, { mode });
     }
     return cache[key];
 }
@@ -67,9 +67,9 @@ function round(value, digits = 1) {
     return Math.round(value * factor) / factor;
 }
 
-async function findRoute({ from, to, role, accessible, mode = "walking" }) {
+async function findRoute({ from, to, role, mode = "walking" }) {
     const driving = mode === "driving";
-    const graph = await getGraph(accessible, mode);
+    const graph = await getGraph(mode);
     if (graph.size === 0) {
         throw new HttpError(503, driving ? "No drivable roads have been marked yet." : "The footpath network has not been set up yet.");
     }
@@ -97,7 +97,6 @@ async function findRoute({ from, to, role, accessible, mode = "walking" }) {
         distanceMeters: round(distanceMeters),
         durationSeconds: Math.max(1, Math.round(distanceMeters / (driving ? DRIVING_SPEED_METERS_PER_SECOND : WALKING_SPEED_METERS_PER_SECOND))),
         mode: driving ? "driving" : "walking",
-        accessible: Boolean(accessible),
         from: start.info,
         to: end.info,
         coordinates: coordinates.map((c) => ({ lat: round(c.lat, 6), lng: round(c.lng, 6) }))
