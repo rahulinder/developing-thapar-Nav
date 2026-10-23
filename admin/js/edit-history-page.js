@@ -1,6 +1,7 @@
 import { listEditHistory } from "./api.js";
 
-const PAGE_LIMIT = 25;
+const historyCard = document.getElementById("history-card");
+const PAGE_LIMIT = (historyCard && Number(historyCard.dataset.limit)) || 25;
 const ACTION_LABELS = { created: "Added", updated: "Changed", deleted: "Deleted" };
 const ENTITY_LABELS = { place: "Place", walkway: "Walkway", junction: "Junction" };
 
@@ -104,3 +105,9 @@ moreButton.addEventListener("click", () => {
 });
 
 document.addEventListener("shell-ready", () => load(true));
+
+let refreshTimer = null;
+document.addEventListener("data-edited", () => {
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(() => load(true), 800);
+});

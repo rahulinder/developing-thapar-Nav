@@ -55,6 +55,9 @@ export async function call(path, { method = "GET", body, auth = true, onSlow } =
         const message = (data && data.error) || "Something went wrong (error " + response.status + ").";
         throw new ApiError(message, response.status, data && data.details);
     }
+    if (method !== "GET" && /^\/(places|paths)/.test(path)) {
+        document.dispatchEvent(new CustomEvent("data-edited"));
+    }
     return data;
 }
 
