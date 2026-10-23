@@ -1,6 +1,7 @@
 import { el, clear } from "./dom.js";
 import { categoryLabel, categoryColor } from "./categories.js";
 import { startRoute } from "./route.js";
+import { isFavourite, toggleFavourite } from "./saved.js";
 
 export function initPlacePanel({ dialog, onShowOnMap = null }) {
     function close() {
@@ -39,6 +40,18 @@ export function initPlacePanel({ dialog, onShowOnMap = null }) {
                 })
             );
         }
+        const saveButton = el("button", {
+            type: "button",
+            class: "panel-button secondary",
+            "aria-pressed": String(isFavourite(place.id)),
+            text: isFavourite(place.id) ? "Saved ★" : "Save ☆",
+            onclick: () => {
+                const saved = toggleFavourite(place.id);
+                saveButton.textContent = saved ? "Saved ★" : "Save ☆";
+                saveButton.setAttribute("aria-pressed", String(saved));
+            }
+        });
+        actions.push(saveButton);
         actions.push(
             el("button", {
                 type: "button",

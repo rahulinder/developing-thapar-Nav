@@ -10,6 +10,7 @@ import {
 import { byId, clear, el, prefersReducedMotion } from "./dom.js";
 import { requireRole, getVisitorName } from "./roles.js";
 import { storage } from "./storage.js";
+import { addRecent, clearRecent, getFavouriteIds, getRecentIds } from "./saved.js";
 import { createStatusBar } from "./status-bar.js";
 import { createLoader } from "./places-store.js";
 import { createSearchBox } from "./search-box.js";
@@ -77,10 +78,58 @@ function main() {
         input: byId("search-input"),
         list: byId("search-suggestions"),
         onSelect: (place) => {
+            addRecent(place.id);
             map.focusPlace(place);
             panel.open(place);
         }
     });
+
+    const myPlaces = byId("my-places");
+
+    function placeChip(place) {
+        return el("button", {
+            type: "button",
+            class: "place-chip",
+            text: place.name,
+            onclick: () => {
+                map.focusPlace(place);
+                panel.open(place);
+            }
+        });
+    }
+
+    function chipGroup(title, chips, action = null) {
+        return el("div", { class: "my-places-group" }, [
+            el("div", { class: "my-places-head" }, [
+                el("h3", { class: "horizontal-scroll-titles", text: title }),
+                action
+            ]),
+            el("div", { class: "chip-row" }, chips)
+        ]);
+    }
+
+    function renderMyPlaces() {
+        clear(myPlaces);
+        const byPlaceId = new Map(places.map((place) => [place.id, place]));
+        const saved = getFavouriteIds().map((id) => byPlaceId.get(id)).filter(Boolean);
+        const savedIds = new Set(saved.map((place) => place.id));
+        const recent = getRecentIds().filter((id) => !savedIds.has(id)).map((id) => byPlaceId.get(id)).filter(Boolean);
+        if (saved.length) {
+            myPlaces.append(chipGroup("Saved places", saved.map(placeChip)));
+        }
+        if (recent.length) {
+            myPlaces.append(
+                chipGroup(
+                    "Recent searches",
+                    recent.map(placeChip),
+                    el("button", { type: "button", class: "chip-clear", text: "Clear", onclick: clearRecent })
+                )
+            );
+        }
+        myPlaces.hidden = saved.length === 0 && recent.length === 0;
+    }
+
+    document.addEventListener("saved-changed", renderMyPlaces);
 
     const HINT_KEY = "thaparNav.mapHintSeen";
     const mapTools = byId("map-tools");
@@ -455,6 +504,7 @@ function main() {
     function renderPlaces(list) {
         places = list;
         clear(sections);
+        renderMyPlaces();
         if (map.available) {
             hideMapMessage();
         }

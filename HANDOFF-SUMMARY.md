@@ -200,3 +200,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Login background
 - The doodle background image is removed from the client login page (client/css/login.css); the page uses the plain #f0f6fc background.
+
+## Saved and recent places, inline login errors
+- client/js/saved.js: favourites (max 10, localStorage thaparNav.favourites) and recent searches (max 5, thaparNav.recent); both fire a saved-changed event. Place panel has a Save/Saved toggle; picking a search suggestion adds to recent. Home shows #my-places chip rows (Saved places, Recent searches with Clear) under the map; they hide when empty and survive logout.
+- Login form is novalidate; errors show under each field (name required, roll number or contact format) with aria-invalid and role=alert, instead of the browser pop-up.

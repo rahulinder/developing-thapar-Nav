@@ -112,3 +112,14 @@ button {
 #credentials-card [hidden] {
     display: none;
 }
+
+#credentials-card .field-error {
+    margin: 0;
+    padding: 0 4px;
+    font-size: 14px;
+    color: #ff7b7b;
+}
+
+#credentials-card input[aria-invalid="true"] {
+    border: 2px solid #ff7b7b;
+}

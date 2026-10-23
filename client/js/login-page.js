@@ -22,32 +22,52 @@ rollInput.value = getRollNo();
 
 document.getElementById("contact-field").hidden = isStudent;
 document.getElementById("roll-field").hidden = !isStudent;
-contactInput.required = !isStudent;
-rollInput.required = isStudent;
+const nameError = document.getElementById("name-error");
+const contactError = document.getElementById("contact-error");
+const rollError = document.getElementById("roll-error");
+
+function setError(input, node, message) {
+    node.textContent = message;
+    node.hidden = !message;
+    if (message) {
+        input.setAttribute("aria-invalid", "true");
+    } else {
+        input.removeAttribute("aria-invalid");
+    }
+}
 
 function finish() {
     setLoginPending(false);
     window.location.href = next;
 }
 
-contactInput.addEventListener("input", () => contactInput.setCustomValidity(""));
-rollInput.addEventListener("input", () => rollInput.setCustomValidity(""));
+nameInput.addEventListener("input", () => setError(nameInput, nameError, ""));
+contactInput.addEventListener("input", () => setError(contactInput, contactError, ""));
+rollInput.addEventListener("input", () => setError(rollInput, rollError, ""));
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    const nameOk = nameInput.value.trim().length > 0;
+    setError(nameInput, nameError, nameOk ? "" : "Enter your name.");
+    let detailOk;
     if (isStudent) {
-        if (!isValidRollNo(rollInput.value)) {
-            rollInput.setCustomValidity("Enter a valid roll number (letters and digits only).");
-            rollInput.reportValidity();
-            return;
-        }
+        detailOk = isValidRollNo(rollInput.value);
+        setError(rollInput, rollError, detailOk ? "" : "Enter a valid roll number (letters and digits only).");
+    } else {
+        detailOk = isValidContact(contactInput.value);
+        setError(contactInput, contactError, detailOk ? "" : "Enter a valid phone number or email address.");
+    }
+    if (!nameOk) {
+        nameInput.focus();
+        return;
+    }
+    if (!detailOk) {
+        (isStudent ? rollInput : contactInput).focus();
+        return;
+    }
+    if (isStudent) {
         setRollNo(rollInput.value);
     } else {
-        if (!isValidContact(contactInput.value)) {
-            contactInput.setCustomValidity("Enter a valid phone number or email address.");
-            contactInput.reportValidity();
-            return;
-        }
         setContact(contactInput.value);
     }
     setVisitorName(nameInput.value);
