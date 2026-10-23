@@ -209,3 +209,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Admin: Settings now has an "Edit History" card -> admin/edit-history.html (+ css/edit-history.css, js/edit-history-page.js, listEditHistory in js/api.js). Tabs All/Places/Walkways/Junctions, action filter, search by name or admin, Load more.
 - Not logged: user (client) removals, admin profile edits, and edits made directly in MongoDB. Entries are never edited or deleted by the app.
 - Tested with the real Express app and an in-memory stand-in for the database (create/update/delete of place, junction, walkway; filters, search, paging, access control: 21 checks) and the real admin page in a browser. Not run against Atlas. tests/api.test.js was not extended (needs a real test database).
+
+## Admin: Home in sidebar
+- admin/side-bar.html: new Home item (assets/admin-panel/side-bar/home.svg) between Menu and User Data, links to dashboard.html. It highlights on the dashboard through the existing markActiveLink in shell.js. Checked in a real browser: icon centred, link works, active highlight, order Menu, Home, User Data, Campus Data, Settings, Logout.
