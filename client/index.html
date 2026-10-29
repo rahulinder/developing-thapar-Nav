@@ -67,9 +67,15 @@
             </div>
         </div>
 
-        <div id="my-places" hidden></div>
-
-        <div id="sections" aria-live="polite"></div>
+        <section id="places-sheet" aria-labelledby="sheet-title">
+            <div class="sheet-handle" aria-hidden="true"></div>
+            <div class="sheet-head">
+                <h2 id="sheet-title">Places on campus</h2>
+                <p>Browse by category, or tap a card for details.</p>
+            </div>
+            <div id="my-places" hidden></div>
+            <div id="sections" aria-live="polite"></div>
+        </section>
     </section>
     <nav id="nav-bar" aria-label="Main">
         <a href="index.html" aria-label="Home"><img class="nav-icons" src="./assets/client-interface/nav-bar/Home.svg" alt=""></a>

@@ -226,3 +226,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Admin Places row: "Location gallery" section sits below "Photo of the location"; adds and removals are staged and applied on Save.
 - Client place panel: a thumbnail strip under the main photo; tapping a thumbnail shows it in the main (1:1) photo.
 - This patch also includes the 1:1 panel photo (base.css) and the Places table wrapping fix (places-data.css, places-page.js), in case they were not yet pushed.
+
+## Client home: bottom sheet (Delhivery style)
+- Map is full width at the top; below it a white rounded "Places on campus" sheet (handle, heading, subtitle) holds My places and the category sections. The sheet hides when a route starts or the map is expanded.
+- Files: client/index.html (new #places-sheet wrapper), client/css/index.css (appended block). No JS or backend change.

@@ -551,3 +551,72 @@ body:has(#route-banner:not([hidden])) #nav-bar {
     border: 0;
     cursor: pointer;
 }
+
+body.page-home #cards-section {
+    padding: 0 0 120px;
+}
+
+body.page-home #role-note {
+    padding: 8px 16px;
+}
+
+body.page-home #home-map {
+    height: 52vh;
+    height: 52dvh;
+    min-height: 320px;
+    margin: 8px 0 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body.page-home .live-map-background {
+    border-radius: 0;
+}
+
+#places-sheet {
+    position: relative;
+    z-index: 5;
+    margin: -28px 0 0;
+    padding: 10px 16px 24px;
+    background: #ffffff;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -6px 18px rgba(13, 17, 23, 0.18);
+}
+
+#places-sheet .sheet-handle {
+    width: 44px;
+    height: 5px;
+    margin: 0 auto 14px;
+    border-radius: 999px;
+    background: #c3ccd8;
+}
+
+#places-sheet .sheet-head h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #0d1117;
+}
+
+#places-sheet .sheet-head p {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #5b6675;
+}
+
+#places-sheet .sheet-head {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e3e9f0;
+}
+
+body.map-expanded #places-sheet,
+body:has(#route-banner:not([hidden])) #places-sheet {
+    display: none;
+}
+
+body.page-home #home-map.is-expanded,
+body.page-home #home-map:has(#route-banner:not([hidden])) {
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+}
