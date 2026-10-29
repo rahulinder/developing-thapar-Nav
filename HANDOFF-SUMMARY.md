@@ -221,5 +221,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Edit history column names
 - Table headers are now Date, Admin's Name, Action, Alteration, Details (were When, Who, Action, What, Details) in admin/edit-history.html and in the history card in admin/path-editor.html. Text change only; checked by reading both files, not re-run in a browser.
 
-## Square place photo
-- .panel-photo in client/css/base.css is now 1:1 (aspect-ratio 1 / 1, up to 360px wide, centred, cover-cropped).
+## Location gallery
+- New PlaceImage collection; Place.gallery is an ordered id list (max 8). Endpoints: GET/POST /api/places/:id/gallery, DELETE /api/places/:id/gallery/:imageId (see API-REFERENCE.md).
+- Admin Places row: "Location gallery" section sits below "Photo of the location"; adds and removals are staged and applied on Save.
+- Client place panel: a thumbnail strip under the main photo; tapping a thumbnail shows it in the main (1:1) photo.
+- This patch also includes the 1:1 panel photo (base.css) and the Places table wrapping fix (places-data.css, places-page.js), in case they were not yet pushed.
