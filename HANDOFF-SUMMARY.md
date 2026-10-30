@@ -256,8 +256,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Text is one step bolder: pages that set the font also set body, input, button, select and textarea to weight 500, and every explicit weight moved up one step (400/424/450 to 500, 500 to 600, 600 to 700, 700 to 800).
 - Files: all client and admin HTML pages with stylesheets, and the CSS files that set a font or weight. Built on 67104b1.
 
-## Bolder text reverted, alias shrink, admin list sizes
-- Bolder text reverted: all files from the "made text a bit bolder" commit are restored to their previous (Inter, normal weight) versions; Inter stays the font (link loads 400-700).
-- Client cards: the alias in brackets stays on the same line as the place name and shrinks from 18px down to 10px to fit (client/js/cards.js fitAlias, re-run on resize); if it still does not fit it is cut with an ellipsis and the name wraps to two lines. Row is now flex-wrap: nowrap (client/css/base.css).
-- Admin lists +2px: places table (headers 15px, cells and name/category 16px, role checkboxes 15px) in admin/css/places-data.css; users table (cells and headers 19px, type badge 16px, Remove button 17px) in admin/css/user-data.css.
-- Built on 250f350.
+## Admin: fixed sidebar, top bar hides on scroll
+- Layout (not position: sticky): on every shell page the body is a full-height flex column (admin/css/side-bar.css). Only the content next to the sidebar scrolls (#dashboard-body > the non-sidebar child, overflow-y auto); the sidebar column never moves.
+- Top bar (admin/css/top-bar.css + watchScroll in admin/js/shell.js): scrolling down hides it (its container collapses to 0 height, the sidebar and content grow to fill), scrolling up or returning near the top shows it again. It only hides when the page is tall enough to scroll at least 160px, and ignores scroll events for 400ms after toggling to avoid flicker.
+- Files: admin/css/side-bar.css, admin/css/top-bar.css, admin/js/shell.js. Built on 250f350.
