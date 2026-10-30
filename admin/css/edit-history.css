@@ -69,7 +69,7 @@ body {
   
   color: white;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 600;
   
   width: fit-content;
   transition: 200ms ease-in-out;
@@ -116,7 +116,7 @@ body {
 }
 .card-title{
   font-size: 20px;
-  font-weight: 450;
+  font-weight: 500;
 
   transition: 196ms ease-in-out;
 }
@@ -203,7 +203,7 @@ a.inner-cards:focus-visible {
 .tab[aria-pressed="true"] {
   background-color: #78ffa7;
   border-color: #008152;
-  font-weight: 600;
+  font-weight: 700;
 }
 .tab span {
   margin-left: 4px;
@@ -240,7 +240,7 @@ a.inner-cards:focus-visible {
   border-bottom: 1px solid #d5deea;
 }
 #history-table th {
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 #history-table td.muted {
@@ -304,4 +304,12 @@ a.inner-cards:focus-visible {
 .badge-deleted {
   background-color: #ffb4b4;
   border-color: #d65a5a;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-weight: 500;
 }

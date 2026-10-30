@@ -250,3 +250,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Tapping a pin now opens a small popup (name, category, Details and Directions buttons) instead of the full panel (client/js/map.js buildPopup, createCampusMap gets onRoute; home.js already passed it).
 - Added the missing CSS in client/css/index.css: route spinner and skeleton shown while a route is being found, #map-message box, .pin-popup styles. Also the map now fills the full screen height when expanded or routing (the old calc(100vh - 32px) left a 32px strip).
 - Files: client/js/map.js, client/css/index.css. Built on 2e4f99c.
+
+## Font: Inter, bolder text
+- Inter is now the project font (client and admin). Every page loads Inter 400-800 from Google Fonts with a system fallback; every font-family uses Inter (client/css/style.css untouched).
+- Text is one step bolder: pages that set the font also set body, input, button, select and textarea to weight 500, and every explicit weight moved up one step (400/424/450 to 500, 500 to 600, 600 to 700, 700 to 800).
+- Files: all client and admin HTML pages with stylesheets, and the CSS files that set a font or weight. Built on 67104b1.

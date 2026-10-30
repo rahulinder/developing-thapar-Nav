@@ -56,7 +56,7 @@ body{
   height: 69px;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
   transition: transform 0.4s ease;
 }
@@ -124,7 +124,7 @@ body{
   width: 186px;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
   transition: transform 0.4s ease;
 }
@@ -139,4 +139,12 @@ body{
   .quick-card-count {
     transition: none;
   }
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-weight: 500;
 }

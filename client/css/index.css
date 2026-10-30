@@ -67,7 +67,7 @@ body.page-home #logo-and-search {
     margin: 0;
     padding: 8px 0 0;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     color: #0d1117;
 }
@@ -152,7 +152,7 @@ body.page-home #logo-and-search {
 
 #route-banner .route-title {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #route-banner .route-meta {
@@ -251,7 +251,7 @@ body.page-home #logo-and-search {
 
 .planner-field label {
     width: 44px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .planner-form {
@@ -429,7 +429,7 @@ body:has(#route-banner:not([hidden])) #logo-and-search {
     right: calc(100% + 10px);
     padding: 6px 10px;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1;
     white-space: nowrap;
     color: #ffffff;
@@ -465,7 +465,7 @@ body:has(#route-banner:not([hidden])) #logo-and-search {
 #route-banner .route-buttons button.danger {
     color: #ffffff;
     background: #cf0000;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 #home-map .leaflet-control-attribution.compact {
@@ -485,7 +485,7 @@ body:has(#route-banner:not([hidden])) #logo-and-search {
     top: 50%;
     left: 50%;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
     font-style: italic;
     color: #0d1117;
     transform: translate(-50%, -50%);
@@ -657,7 +657,7 @@ body.page-home:not(.map-expanded) #home-map:has(#route-banner:not([hidden])) .ca
 .sheet-head h2 {
     margin: 0;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #0d1117;
 }
 
