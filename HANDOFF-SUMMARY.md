@@ -235,3 +235,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Recent searches in the search dropdown
 - Recent searches no longer show in the home sheet. They appear in a dropdown under the top search bar only while the empty search box is focused, with a Clear button; hidden otherwise. Saved places stay in the sheet.
 - Files: client/js/search-box.js (recent/onClearRecent options, used only by the top search bar), client/js/home.js, client/css/base.css (appended styles).
+
+## Client top bar: 80px
+- #logo-and-search is now 80px tall (was about 88px): padding 8px 16px, logo 35px wide (64px tall), #search-bar 64px tall (48px pill). Sticky offset of #hostel-category in places.css changed from 88px to 80px.
+- Files: client/css/base.css, client/css/places.css.

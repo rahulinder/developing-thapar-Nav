@@ -16,7 +16,7 @@ body.page-places #logo-and-search {
 
 #hostel-category {
     position: sticky;
-    top: 88px;
+    top: 80px;
     z-index: 10;
     width: calc(100% - 32px);
     max-width: 992px;
