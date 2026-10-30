@@ -16,6 +16,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
     <script type="module" src="./js/home.js"></script>
+    <script type="module" src="./js/sheet.js"></script>
 </head>
 <body class="page-home">
 <main>
@@ -28,7 +29,6 @@
     </section>
     <div id="status" role="status" aria-live="polite"></div>
     <section id="cards-section">
-        <p id="role-note"></p>
         <div id="home-map" class="cards">
             <div id="map" class="live-map-background" aria-label="Campus map"></div>
             <div class="map-tools" id="map-tools">
@@ -68,13 +68,18 @@
         </div>
 
         <section id="places-sheet" aria-labelledby="sheet-title">
-            <div class="sheet-handle" aria-hidden="true"></div>
-            <div class="sheet-head">
-                <h2 id="sheet-title">Places on campus</h2>
-                <p>Browse by category, or tap a card for details.</p>
+            <div class="sheet-grip" id="sheet-grip">
+                <button type="button" class="sheet-handle" id="sheet-handle" aria-label="Resize the places panel"></button>
+                <div class="sheet-head">
+                    <p id="role-note"></p>
+                    <h2 id="sheet-title">Places on campus</h2>
+                    <p>Browse by category, or tap a card for details.</p>
+                </div>
             </div>
-            <div id="my-places" hidden></div>
-            <div id="sections" aria-live="polite"></div>
+            <div class="sheet-body" id="sheet-body">
+                <div id="my-places" hidden></div>
+                <div id="sections" aria-live="polite"></div>
+            </div>
         </section>
     </section>
     <nav id="nav-bar" aria-label="Main">

@@ -552,19 +552,25 @@ body:has(#route-banner:not([hidden])) #nav-bar {
     cursor: pointer;
 }
 
-body.page-home #cards-section {
-    padding: 0 0 120px;
+body.page-home {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
 }
 
-body.page-home #role-note {
-    padding: 8px 16px;
+body.page-home #cards-section {
+    padding: 0;
 }
 
 body.page-home #home-map {
-    height: 52vh;
-    height: 52dvh;
-    min-height: 320px;
-    margin: 8px 0 0;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: 1024px;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0 auto;
     border-radius: 0;
     box-shadow: none;
 }
@@ -573,50 +579,112 @@ body.page-home .live-map-background {
     border-radius: 0;
 }
 
-#places-sheet {
-    position: relative;
-    z-index: 5;
-    margin: -28px 0 0;
-    padding: 10px 16px 24px;
-    background: #ffffff;
-    border-radius: 28px 28px 0 0;
-    box-shadow: 0 -6px 18px rgba(13, 17, 23, 0.18);
+body.page-home #home-map .map-tools {
+    top: 104px;
 }
 
-#places-sheet .sheet-handle {
+body.map-expanded #home-map .map-tools,
+body:has(#route-banner:not([hidden])) #home-map .map-tools {
+    top: 24px;
+}
+
+body.page-home #home-map .card-details > .location-row,
+body.page-home #home-map #explore-button {
+    display: none;
+}
+
+body.page-home #home-map .card-details:not(:has(#route-banner:not([hidden]))):not(:has(#route-planner:not([hidden]))) {
+    display: none;
+}
+
+body.page-home:not(.map-expanded) #home-map .card-details {
+    margin-bottom: 104px;
+}
+
+body.page-home:not(.map-expanded) #home-map:has(#route-banner:not([hidden])) .card-details {
+    margin-bottom: 16px;
+}
+
+#places-sheet {
+    --sheet-h: 52dvh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1024px;
+    height: var(--sheet-h);
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -6px 18px rgba(13, 17, 23, 0.22);
+    transition: height 0.25s ease;
+}
+
+#places-sheet.is-dragging {
+    transition: none;
+}
+
+.sheet-grip {
+    flex: none;
+    padding: 0 16px 10px;
+    touch-action: none;
+    cursor: grab;
+    user-select: none;
+}
+
+.sheet-handle {
+    display: block;
+    width: 100%;
+    height: 26px;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: inherit;
+}
+
+.sheet-handle::before {
+    content: "";
+    display: block;
     width: 44px;
     height: 5px;
-    margin: 0 auto 14px;
+    margin: 0 auto;
     border-radius: 999px;
     background: #c3ccd8;
 }
 
-#places-sheet .sheet-head h2 {
+.sheet-head h2 {
     margin: 0;
     font-size: 24px;
     font-weight: 600;
     color: #0d1117;
 }
 
-#places-sheet .sheet-head p {
+.sheet-head p {
     margin: 2px 0 0;
     font-size: 14px;
     color: #5b6675;
 }
 
-#places-sheet .sheet-head {
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e3e9f0;
+.sheet-body {
+    flex: 1;
+    min-height: 0;
+    padding: 0 16px 120px;
+    overflow-y: auto;
+    border-top: 1px solid #e3e9f0;
+    overscroll-behavior: contain;
+}
+
+body.page-home #role-note {
+    padding: 0 0 6px;
+    font-size: 22px;
 }
 
 body.map-expanded #places-sheet,
-body:has(#route-banner:not([hidden])) #places-sheet {
+body:has(#route-banner:not([hidden])) #places-sheet,
+body:has(#route-planner:not([hidden])) #places-sheet {
     display: none;
-}
-
-body.page-home #home-map.is-expanded,
-body.page-home #home-map:has(#route-banner:not([hidden])) {
-    height: 100vh;
-    height: 100dvh;
-    margin: 0;
 }

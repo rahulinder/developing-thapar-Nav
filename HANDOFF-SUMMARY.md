@@ -227,6 +227,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Client place panel: a thumbnail strip under the main photo; tapping a thumbnail shows it in the main (1:1) photo.
 - This patch also includes the 1:1 panel photo (base.css) and the Places table wrapping fix (places-data.css, places-page.js), in case they were not yet pushed.
 
-## Client home: bottom sheet (Delhivery style)
-- Map is full width at the top; below it a white rounded "Places on campus" sheet (handle, heading, subtitle) holds My places and the category sections. The sheet hides when a route starts or the map is expanded.
-- Files: client/index.html (new #places-sheet wrapper), client/css/index.css (appended block). No JS or backend change.
+## Client home: map background plus draggable places sheet
+- The map (#home-map) is fixed full-screen behind everything. The "Places on campus" sheet (#places-sheet) overlays it and holds the greeting (#role-note), My places and all category sections; it scrolls inside.
+- Sheet has three heights (small, half, full): drag the handle or tap it to cycle (client/js/sheet.js, new). It hides while a route is planned or running and when the map is expanded.
+- Files: client/index.html, client/css/index.css (appended block), client/js/sheet.js. No backend change.
