@@ -44,7 +44,7 @@ body {
     margin: 0 0 8px;
     color: white;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 500;
 }
 #title-arrow {
     width: 0;
@@ -84,7 +84,7 @@ button {
     height: 40px;
     padding: 0 16px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -132,8 +132,8 @@ button.danger {
 #places-table th {
     text-align: left;
     padding: 12px 8px;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     color: #374151;
     border-bottom: 2px solid #cfdbe8;
 }
@@ -156,7 +156,7 @@ tr.row-new td {
     width: 100%;
     height: 36px;
     padding: 0 8px;
-    font-size: 14px;
+    font-size: 16px;
     color: black;
     background: transparent;
     border: 2px solid transparent;
@@ -195,7 +195,7 @@ tr.row-new td {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 13px;
+    font-size: 15px;
     white-space: nowrap;
 }
 .check input {
@@ -310,7 +310,7 @@ dialog p {
     height: 40px;
     padding: 0 16px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     color: #0d1117;
     background: #e5e7eb;
     border-radius: 12px;
@@ -429,7 +429,7 @@ dialog p {
 .view-text {
     display: block;
     padding: 0 8px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.35;
     white-space: normal;
     overflow-wrap: normal;
@@ -449,12 +449,4 @@ dialog p {
 }
 #places-table td:nth-child(2) {
     min-width: 130px;
-}
-
-body,
-input,
-button,
-select,
-textarea {
-    font-weight: 500;
 }

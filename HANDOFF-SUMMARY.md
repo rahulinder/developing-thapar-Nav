@@ -255,3 +255,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Inter is now the project font (client and admin). Every page loads Inter 400-800 from Google Fonts with a system fallback; every font-family uses Inter (client/css/style.css untouched).
 - Text is one step bolder: pages that set the font also set body, input, button, select and textarea to weight 500, and every explicit weight moved up one step (400/424/450 to 500, 500 to 600, 600 to 700, 700 to 800).
 - Files: all client and admin HTML pages with stylesheets, and the CSS files that set a font or weight. Built on 67104b1.
+
+## Bolder text reverted, alias shrink, admin list sizes
+- Bolder text reverted: all files from the "made text a bit bolder" commit are restored to their previous (Inter, normal weight) versions; Inter stays the font (link loads 400-700).
+- Client cards: the alias in brackets stays on the same line as the place name and shrinks from 18px down to 10px to fit (client/js/cards.js fitAlias, re-run on resize); if it still does not fit it is cut with an ellipsis and the name wraps to two lines. Row is now flex-wrap: nowrap (client/css/base.css).
+- Admin lists +2px: places table (headers 15px, cells and name/category 16px, role checkboxes 15px) in admin/css/places-data.css; users table (cells and headers 19px, type badge 16px, Remove button 17px) in admin/css/user-data.css.
+- Built on 250f350.
