@@ -239,3 +239,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Client top bar: 80px
 - #logo-and-search is now 80px tall (was about 88px): padding 8px 16px, logo 35px wide (64px tall), #search-bar 64px tall (48px pill). Sticky offset of #hostel-category in places.css changed from 88px to 80px.
 - Files: client/css/base.css, client/css/places.css.
+
+## Client: nav bar removed, hamburger menu, emergency numbers
+- The bottom #nav-bar is removed from index.html and places.html. A hamburger link (#menu-toggle, href menu.html) sits right of the search bar in the top bar and opens the side drawer (menu-drawer.js intercepts links to menu.html). Home and Support remain inside the drawer.
+- Support overlay (built in client/js/menu-drawer.js) now has two groups: Technical Support (email nav.support@thapar.edu, contact 9876543210, unchanged) and Emergency (Ambulance 9182736405 / 9282726258, Security 9392048204 / 9587340524, each a tel: link).
+- Bottom padding of the home sheet body and places list reduced from 120px to 32px since the bar is gone.
+- Files: client/index.html, client/places.html, client/js/menu-drawer.js, client/css/base.css, index.css, places.css, drawer.css.

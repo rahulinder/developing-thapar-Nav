@@ -698,3 +698,19 @@ a {
     border: 0;
     cursor: pointer;
 }
+
+#menu-toggle {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 8px;
+    color: #ffffff;
+    border-radius: 50%;
+}
+
+#menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
