@@ -679,3 +679,22 @@ a {
 *::-webkit-scrollbar {
     display: none;
 }
+
+.suggestion-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #5b6672;
+}
+
+.suggestion-clear {
+    padding: 4px 8px;
+    font: inherit;
+    color: #0071e3;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}

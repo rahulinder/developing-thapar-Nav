@@ -231,3 +231,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - The map (#home-map) is fixed full-screen behind everything. The "Places on campus" sheet (#places-sheet) overlays it and holds the greeting (#role-note), My places and all category sections; it scrolls inside.
 - Sheet has three heights (small, half, full): drag the handle or tap it to cycle (client/js/sheet.js, new). It hides while a route is planned or running and when the map is expanded.
 - Files: client/index.html, client/css/index.css (appended block), client/js/sheet.js. No backend change.
+
+## Recent searches in the search dropdown
+- Recent searches no longer show in the home sheet. They appear in a dropdown under the top search bar only while the empty search box is focused, with a Clear button; hidden otherwise. Saved places stay in the sheet.
+- Files: client/js/search-box.js (recent/onClearRecent options, used only by the top search bar), client/js/home.js, client/css/base.css (appended styles).
