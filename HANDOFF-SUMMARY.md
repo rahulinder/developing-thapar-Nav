@@ -245,3 +245,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Support overlay (built in client/js/menu-drawer.js) now has two groups: Technical Support (email nav.support@thapar.edu, contact 9876543210, unchanged) and Emergency (Ambulance 9182736405 / 9282726258, Security 9392048204 / 9587340524, each a tel: link).
 - Bottom padding of the home sheet body and places list reduced from 120px to 32px since the bar is gone.
 - Files: client/index.html, client/places.html, client/js/menu-drawer.js, client/css/base.css, index.css, places.css, drawer.css.
+
+## Client: pin popups, route loading styles (repo gap fixed)
+- Tapping a pin now opens a small popup (name, category, Details and Directions buttons) instead of the full panel (client/js/map.js buildPopup, createCampusMap gets onRoute; home.js already passed it).
+- Added the missing CSS in client/css/index.css: route spinner and skeleton shown while a route is being found, #map-message box, .pin-popup styles. Also the map now fills the full screen height when expanded or routing (the old calc(100vh - 32px) left a 32px strip).
+- Files: client/js/map.js, client/css/index.css. Built on 2e4f99c.
