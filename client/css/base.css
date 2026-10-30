@@ -654,9 +654,9 @@ a {
 }
 
 .cards.place-card .card-details {
-    row-gap: 10px;
+    row-gap: 8px;
     min-height: 0;
-    margin: 0 16px 16px;
+    margin: 0 16px 20px;
     margin-top: auto;
     padding: 0;
     background-color: transparent;
@@ -665,7 +665,7 @@ a {
 
 .cards.place-card .card-details .location-name {
     min-height: 0;
-    padding: 0 12px;
+    padding: 0 4px;
     border-bottom: none;
     color: #ffffff;
     font-size: 26px;
@@ -680,7 +680,8 @@ a {
 }
 
 .cards.place-card .card-details .route-button {
-    height: 56px;
+    flex-shrink: 0;
+    height: 64px;
     border-radius: 100vh;
     background-color: #ffffff;
     color: #0d1117;
