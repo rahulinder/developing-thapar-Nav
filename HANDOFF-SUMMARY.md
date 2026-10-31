@@ -264,3 +264,8 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 ## Card spacing and concentric corners
 - Place cards (client/css/base.css, .cards.place-card): one --card-inset (16px) now drives the left, right and bottom gap of the details block and the top-left badge; the card radius is 48px and the Start Route button radius is card radius minus inset (32px, equal to half its 64px height), so the gap to the card corner is the same all the way round. Card shadow is now symmetric (0 4px 12px) instead of offset 4px 4px.
 - Built on fcc0602.
+
+## base.css regression repaired
+- The repo's client/css/base.css had reverted to an older version (Google Sans Flex, 72px logo and auto-height top bar, no gallery strip, no 1:1 panel photo, no recent-search dropdown or hamburger styles, old alias wrapping). It is rebuilt from the last good version plus the current experimental card style (.cards.place-card block, --card-inset, --card-radius).
+- Restored: 1:1 .panel-photo, .panel-gallery styles, 80px top bar and 35px logo, Inter, alias nowrap and shrink styles, .suggestion-head/.suggestion-clear, #menu-toggle.
+- client/index.html also gets the "Explore Campus" sheet title (it was not applied in the repo). All other files were checked and are intact. Built on 78f7c52.
