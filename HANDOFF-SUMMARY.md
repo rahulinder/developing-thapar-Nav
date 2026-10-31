@@ -260,3 +260,7 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - Layout (not position: sticky): on every shell page the body is a full-height flex column (admin/css/side-bar.css). Only the content next to the sidebar scrolls (#dashboard-body > the non-sidebar child, overflow-y auto); the sidebar column never moves.
 - Top bar (admin/css/top-bar.css + watchScroll in admin/js/shell.js): scrolling down hides it (its container collapses to 0 height, the sidebar and content grow to fill), scrolling up or returning near the top shows it again. It only hides when the page is tall enough to scroll at least 160px, and ignores scroll events for 400ms after toggling to avoid flicker.
 - Files: admin/css/side-bar.css, admin/css/top-bar.css, admin/js/shell.js. Built on 250f350.
+
+## Card spacing and concentric corners
+- Place cards (client/css/base.css, .cards.place-card): one --card-inset (16px) now drives the left, right and bottom gap of the details block and the top-left badge; the card radius is 48px and the Start Route button radius is card radius minus inset (32px, equal to half its 64px height), so the gap to the card corner is the same all the way round. Card shadow is now symmetric (0 4px 12px) instead of offset 4px 4px.
+- Built on fcc0602.
