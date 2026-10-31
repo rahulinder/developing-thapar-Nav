@@ -269,3 +269,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - The repo's client/css/base.css had reverted to an older version (Google Sans Flex, 72px logo and auto-height top bar, no gallery strip, no 1:1 panel photo, no recent-search dropdown or hamburger styles, old alias wrapping). It is rebuilt from the last good version plus the current experimental card style (.cards.place-card block, --card-inset, --card-radius).
 - Restored: 1:1 .panel-photo, .panel-gallery styles, 80px top bar and 35px logo, Inter, alias nowrap and shrink styles, .suggestion-head/.suggestion-clear, #menu-toggle.
 - client/index.html also gets the "Explore Campus" sheet title (it was not applied in the repo). All other files were checked and are intact. Built on 78f7c52.
+
+## Dashboard quick-card gap
+- .quick-cards (admin/css/dashboard.css) now has grid-auto-rows: 160px and align-content: start, so the row gap stays 16px like the column gap. Before, the grid rows stretched to fill the scrolling content area (since the shell layout change), leaving a large vertical gap. Built on 9322857.

@@ -28,8 +28,10 @@ body{
   display: grid;
   flex: 1;
   grid-template-columns: repeat(2, 256px);
+  grid-auto-rows: 160px;
   gap: 16px;
   justify-content: center;
+  align-content: start;
   padding: 16px;
 }
 .quick-card {
