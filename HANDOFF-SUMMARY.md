@@ -281,3 +281,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Smaller alias
 - The alias in brackets on place cards is now 14px at full size (was 17-18px) and can shrink down to 9px (was 10px) to stay beside the name: client/js/cards.js (ALIAS_MAX 14, ALIAS_MIN 9) and client/css/base.css. Built on a65b04c.
+
+## Name and alias aligned at the bottom
+- On place cards the name and the alias now sit on the same text baseline (client/css/base.css): .location-name uses align-items flex-end, and the alias gets bottom padding of 0.24 x (name size - alias size) so its baseline matches the name's. --name-size is 24px (original card) or 26px (experimental card). Built on dcbc3cf.
