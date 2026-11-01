@@ -272,3 +272,9 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 
 ## Dashboard quick-card gap
 - .quick-cards (admin/css/dashboard.css) now has grid-auto-rows: 160px and align-content: start, so the row gap stays 16px like the column gap. Before, the grid rows stretched to fill the scrolling content area (since the shell layout change), leaving a large vertical gap. Built on 9322857.
+
+## Card style variants (smaller cards)
+- Client place cards are 280px square (were 320px) in both variants (client/css/base.css .cards width/height).
+- experimental/client/css/base.css: current photo-first card (name over the photo, white pill Start Route, 16px inset, concentric 48px/32px corners).
+- original/client/css/base.css: the earlier card with the white details box over the photo (the whole "EXPERIMENT" block removed).
+- Copy ONE of the two base.css files over client/css/base.css. Built on c9872a9.
