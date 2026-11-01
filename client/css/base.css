@@ -329,7 +329,7 @@ a {
     margin: 0 4px;
     padding: 0;
     overflow: hidden;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -762,7 +762,7 @@ a {
 
 .cards.place-card .card-details .location-name .name-in-brackets {
     margin: 0;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 400;
 }
 

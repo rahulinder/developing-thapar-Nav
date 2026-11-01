@@ -278,3 +278,6 @@ E1, E2, E3 and E4 passed real-browser Playwright tests (45 + 34 + 32 checks) aga
 - experimental/client/css/base.css: current photo-first card (name over the photo, white pill Start Route, 16px inset, concentric 48px/32px corners).
 - original/client/css/base.css: the earlier card with the white details box over the photo (the whole "EXPERIMENT" block removed).
 - Copy ONE of the two base.css files over client/css/base.css. Built on c9872a9.
+
+## Smaller alias
+- The alias in brackets on place cards is now 14px at full size (was 17-18px) and can shrink down to 9px (was 10px) to stay beside the name: client/js/cards.js (ALIAS_MAX 14, ALIAS_MIN 9) and client/css/base.css. Built on a65b04c.

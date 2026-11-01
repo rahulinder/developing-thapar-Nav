@@ -2,8 +2,8 @@ import { el } from "./dom.js";
 import { categoryLabel, categoryColor } from "./categories.js";
 import { HOME_CARDS_PER_SECTION } from "./config.js";
 
-const ALIAS_MAX = 18;
-const ALIAS_MIN = 10;
+const ALIAS_MAX = 14;
+const ALIAS_MIN = 9;
 
 function fitAlias(name) {
     const title = name.querySelector(".name-text");
